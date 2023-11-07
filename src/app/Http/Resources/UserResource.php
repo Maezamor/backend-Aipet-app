@@ -22,6 +22,8 @@ class UserResource extends JsonResource
             'address' => $this->address,
             'phone' => $this->phone,
             'email' => $this->email,
+            //if there token 
+            'token' => $this->whenNotNull($this->token)
         ];
     }
 }

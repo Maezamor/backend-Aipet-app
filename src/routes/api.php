@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Middleware\ApiAuthMiddleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +21,9 @@ use App\Http\Controllers\UserController;
 // });
 
 Route::post('/users', [UserController::class, 'register']);
+Route::post('/users/login',[UserController::class,'login']);
+
+// dalam membungkases fitur yang lebih crusial,
+Route::middleware(ApiAuthMiddleware::class)->group(function(){
+    Route::get('/users/current',[UserController::class,'getCurrent']);
+});

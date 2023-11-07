@@ -2,9 +2,11 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use App\Models\User;
+use Database\Seeders\UserSeeder;
+use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class UserTest extends TestCase
 {
@@ -30,7 +32,24 @@ class UserTest extends TestCase
     ]);
    }
 
-   public function testRegisterFailed(){
+   public function testRegisterFormatFailed(){
+    $this->post('/api/users',[
+        'username' => 'fieren',
+        'password' => 'fieren123',
+        'name' => 'fieren si penyihir',
+        'address' => 'zenia kingdom',
+        'phone' => '123456789',
+        'email' => 'fierengmail.com'
+    ])->assertStatus(400)->assertJson([
+        "errors" => [
+            'email' => [
+                "The email field must be a valid email address."
+            ]
+        ]
+    ]);
+   }
+
+   public function tesRegisterEmailFailed(){
     $this->post('/api/users',[
         'username' => '',
         'password' => '',
@@ -80,4 +99,126 @@ class UserTest extends TestCase
             ]
         ]);
    }
+
+
+   public function testLoginSuccess(){
+    $this->seed([UserSeeder::class]);
+    $this->post('/api/users/login',[
+        'email' => 'fieren@gmail.com',
+        'password' => 'fieren123'
+    ])->assertStatus(200)->assertJson([
+        'data' => [
+            'username' => 'fieren',
+            'name' => 'fieren si penyihir',
+            'address' => 'antasia kingdom',
+            'phone' => '123456',
+            'email' => 'fieren@gmail.com'
+        ]
+    ]);
+
+    // penegchekan apakah token sudah di regeberate
+    $user = User::where('email', 'fieren@gmail.com')->first();
+    self::assertNotNull($user->token);
+    }
+
+
+    public function testLoginFailedEmailNotfound(){
+        $this->post('/api/users/login',[
+            'email' => 'fieren123@gmail.com',
+            'password' => 'fieren123'
+        ])->assertStatus(401)->assertJson([
+            'errors' => [
+                "message" => [
+                    "username or password wrong"
+                ]
+            ]
+        ]);
+    }
+
+    public function testLoginFailedPasswordWrong(){
+        $this->post('/api/users/login',[
+            'email' => 'fieren123@gmail.com',
+            'password' => 'fieren12312'
+        ])->assertStatus(401)->assertJson([
+            'errors' => [
+                "message" => [
+                    "username or password wrong"
+                ]
+            ]
+        ]);
+    }
+
+    public function testLoginFailedWrongEmailFormater(){
+        $this->post('/api/users/login',[
+            'email' => 'fieren123gmail.com',
+            'password' => 'fieren12312'
+        ])->assertStatus(400)->assertJson([
+            "errors" => [
+                'email' => [
+                    "The email field must be a valid email address."
+                ]
+            ]
+        ]);
+    }
+
+    public function testLoginFailedNotingValuelogininput(){
+        $this->post('/api/users/login',[
+            'email' => '',
+            'password' => ''
+        ])->assertStatus(400)->assertJson([
+            "errors" => [
+                'email' => [
+                    "The email field is required."
+                ],
+                'password' => [
+                    "The password field is required."
+                ]
+            ]
+        ]);
+    }
+
+    public function testGetCurrentUserSuccess(){
+        $this->seed([UserSeeder::class]);
+        $this->get('/api/users/current',[
+            //header for api
+            'Authorization' => 'fierencoll' 
+        ])->assertStatus(200)->assertJson([
+            'data' => [
+                'username' => 'fieren',
+                'name' => 'fieren si penyihir',
+                'address' => 'antasia kingdom',
+                'phone' => '123456',
+                'email' => 'fieren@gmail.com'
+            ]
+        ]);
+    }
+
+    public function testGetCurrentUserUnauthorized()
+    {
+        $this->seed([UserSeeder::class]);
+        $this->get('/api/users/current',[
+        ])->assertStatus(401)->assertJson([
+            'errors' => [
+                'message' => [
+                    "unauthorized"
+                ]
+           
+            ]
+        ]);
+    }
+
+    public function testGetCurrentUserInvlaidToken()
+    {
+        $this->seed([UserSeeder::class]);
+        $this->get('/api/users/current',[
+            'Authorization' => 'jhlyicl'
+        ])->assertStatus(401)->assertJson([
+            'errors' => [
+                'message' => [
+                    "unauthorized"
+                ]
+           
+            ]
+        ]);
+    }
 }
