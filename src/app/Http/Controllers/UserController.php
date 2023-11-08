@@ -108,6 +108,8 @@ class UserController extends Controller
         $user->token = null;
         $user->save();
 
+        Auth::logout();
+
         return response()->json([
             'data'=>true
         ])->setStatusCode(200);
