@@ -221,4 +221,114 @@ class UserTest extends TestCase
             ]
         ]);
     }
+
+    //TODO  testing unutk api update user
+    public function testUpdatePasswordSuccess()
+    {
+        $this->seed([UserSeeder::class]);
+        $oldUser = User::where('email', 'fieren@gmail.com')->first();
+
+        $this->patch('/api/users/current',
+            [
+                'password' => 'fieren123'
+            ],
+            [
+                'Authorization' => 'fierencoll'
+            ]
+        )->assertStatus(200)
+            ->assertJson([
+                'data' => [
+                    'username' => 'fieren',
+                    'name' => 'fieren si penyihir',
+                    'address' => 'antasia kingdom',
+                    'phone' => '123456',
+                    'email' => 'fieren@gmail.com'
+                ]
+            ]);
+
+        $newUser = User::where('email', 'fieren@gmail.com')->first();
+        self::assertNotEquals($oldUser->password, $newUser->password); 
+    }  
+     //TODO  testing unutk api update user
+     public function testUpdateNameandAddressSuccess()
+     {
+         $this->seed([UserSeeder::class]);
+         $oldUser = User::where('email', 'fieren@gmail.com')->first();
+ 
+         $this->patch('/api/users/current',
+             [
+                 'name' => 'fren',
+                 'address'=> 'konstania'
+             ],
+             [
+                 'Authorization' => 'fierencoll'
+             ]
+         )->assertStatus(200)
+             ->assertJson([
+                 'data' => [
+                     'username' => 'fieren',
+                     'name' => 'fren',
+                     'address' => 'konstania',
+                     'phone' => '123456',
+                     'email' => 'fieren@gmail.com'
+                 ]
+             ]);
+ 
+         $newUser = User::where('email', 'fieren@gmail.com')->first();
+         self::assertNotEquals($oldUser->name, $newUser->name); 
+         self::assertNotEquals($oldUser->address, $newUser->address); 
+     } 
+
+     public function testUpdateFailed ()
+     {
+         $this->seed([UserSeeder::class]);
+         $this->patch('/api/users/current',
+             [
+                 'name' => 'frenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfrenfren'
+             ],
+             [
+                 'Authorization' => 'fierencoll'
+             ]
+         )->assertStatus(400)
+             ->assertJson([
+                 'errors' => [
+                     'name' => [
+                         'The name field must not be greater than 100 characters.'
+                     ]
+                 ]
+             ]);
+     } 
+
+     //TES LOGOUT
+     public function testLogoutSuccess()
+     {
+         $this->seed([UserSeeder::class]);
+ 
+         $this->delete(uri: '/api/users/logout', headers: [
+             'Authorization' => 'fierencoll'
+         ])->assertStatus(200)
+             ->assertJson([
+                 "data" => true
+             ]);
+ 
+         $user = User::where('email', 'fieren@gmail.com')->first();
+         self::assertNull($user->token);
+ 
+     }
+ 
+     public function testLogoutFailed()
+     {
+         $this->seed([UserSeeder::class]);
+ 
+         $this->delete(uri: '/api/users/logout', headers: [
+             'Authorization' => 'dasdadadad'
+         ])->assertStatus(401)
+             ->assertJson([
+                 "errors" => [
+                     "message" => [
+                         "unauthorized"
+                     ]
+                 ]
+             ]);
+     }
 }
