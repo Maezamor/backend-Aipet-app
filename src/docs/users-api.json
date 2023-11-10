@@ -7,7 +7,7 @@
     },
     "servers": [
         {
-            "url": "http://localhost:8000"
+            "url": "http://localhost:8001"
         }
     ],
     "paths": {
@@ -34,8 +34,8 @@
                                 "type": "object",
                                 "required": [
                                     "username",
-                                    "nama",
-                                    "alamat",
+                                    "name",
+                                    "address",
                                     "nomor",
                                     "email",
                                     "password"
@@ -78,11 +78,10 @@
                                                     "username is required"
                                                 ],
                                                 "name": [
-                                                    "name is required",
-                                                    "name is not special caracter"
+                                                    "name is required"
                                                 ],
                                                 "alamat": [
-                                                    "alamat is required"
+                                                    "address is required"
                                                 ],
                                                 "phone": [
                                                     "phone is required"

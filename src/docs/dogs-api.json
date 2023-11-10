@@ -1,0 +1,342 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "Dogy API",
+        "description": "Api akses data dogy",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8001"
+        }
+    ],
+    "paths": {
+        "/api/dogy": {
+            "post": {
+                "description": "Create dogy documentation",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Create value Request Dogy",
+                    "content": {
+                        "aplication/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "nama": {
+                                        "type": "string"
+                                    },
+                                    "umur": {
+                                        "type": "string"
+                                    },
+                                    "id_jenis": {
+                                        "type": "number"
+                                    },
+                                    "id_selter": {
+                                        "type": "number"
+                                    },
+                                    "id_gender": {
+                                        "type": "number"
+                                    },
+                                    "rescue_story": {
+                                        "type": "text"
+                                    },
+                                    "character": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success Create Dogy Documentation",
+                        "content": {
+                            "aplication/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "number"
+                                                },
+                                                "nama": {
+                                                    "type": "string"
+                                                },
+                                                "id_jenis": {
+                                                    "type": "number"
+                                                },
+                                                "id_selter": {
+                                                    "type": "number"
+                                                },
+                                                "rescue_story": {
+                                                    "type": "text"
+                                                },
+                                                "character": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "description": "Search Dogy",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "name": "name",
+                        "in": "query"
+                    },
+                    {
+                        "name": "jenis",
+                        "in": "query"
+                    },
+                    {
+                        "name": "caracter",
+                        "in": "query"
+                    },
+                    {
+                        "name": "size",
+                        "in": "query"
+                    },
+                    {
+                        "name": "page",
+                        "in": "query"
+                    }
+                ],
+                "response": {
+                    "200": {
+                        "description": "Success search",
+                        "contet": {
+                            "aplication/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "number"
+                                                    },
+                                                    "nama": {
+                                                        "type": "string"
+                                                    },
+                                                    "id_jenis": {
+                                                        "type": "number"
+                                                    },
+                                                    "id_selter": {
+                                                        "type": "number"
+                                                    },
+                                                    "rescue_story": {
+                                                        "type": "text"
+                                                    },
+                                                    "character": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        },
+                                        "meta": {
+                                            "type": "object"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/dogy/{id}": {
+            "put": {
+                "description": "Update Dogy",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "name": "id",
+                        "in": "header"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Update Dogy Request",
+                    "content": {
+                        "aplication/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "nama": {
+                                        "type": "string"
+                                    },
+                                    "id_jenis": {
+                                        "type": "number"
+                                    },
+                                    "id_selter": {
+                                        "type": "number"
+                                    },
+                                    "rescue_story": {
+                                        "type": "text"
+                                    },
+                                    "character": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Update Success Dogy",
+                        "content": {
+                            "aplication/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "number"
+                                                },
+                                                "nama": {
+                                                    "type": "string"
+                                                },
+                                                "id_jenis": {
+                                                    "type": "number"
+                                                },
+                                                "id_selter": {
+                                                    "type": "number"
+                                                },
+                                                "rescue_story": {
+                                                    "type": "text"
+                                                },
+                                                "character": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "description": "Get detail anjing",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path"
+                    }
+                ],
+                "response": {
+                    "200": {
+                        "description": "success get detail anjing",
+                        "content": {
+                            "aplication/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "number"
+                                                },
+                                                "nama": {
+                                                    "type": "string"
+                                                },
+                                                "id_jenis": {
+                                                    "type": "number"
+                                                },
+                                                "id_selter": {
+                                                    "type": "number"
+                                                },
+                                                "rescue_story": {
+                                                    "type": "text"
+                                                },
+                                                "character": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Remove dogy",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path"
+                    }
+                ],
+                "response": {
+                    "200": {
+                        "description": "Success delete Dogy",
+                        "content": {
+                            "aplication/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object"
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
