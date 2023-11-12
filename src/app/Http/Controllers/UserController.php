@@ -16,13 +16,14 @@ use Illuminate\Http\Exceptions\HttpResponseException;
 
 class UserController extends Controller
 {
-    public function register(UserRegisterRequest $request): JsonResponse {
+    public function register(UserRegisterRequest $request): JsonResponse
+    {
         // geting request from post
         $data = $request->validated();
 
-       // if have already account give feedback
-       if(User::where('email', $data['email'])->count() == 1){
-        //giving feedback
+        // if have already account give feedback
+        if (User::where('email', $data['email'])->count() == 1) {
+            //giving feedback
             throw new HttpResponseException(response([
                 'errors' => [
                     'email' => [
@@ -30,14 +31,14 @@ class UserController extends Controller
                     ]
                 ]
             ], 400));
-       }
+        }
 
-       // go to create user
-       $user = new User($data);
-       $user->password = Hash::make($data['password']);
-       // go create
-       $user->save();
-       return (new UserResource($user))->response()->setStatusCode(201);
+        // go to create user
+        $user = new User($data);
+        $user->password = Hash::make($data['password']);
+        // go create
+        $user->save();
+        return (new UserResource($user))->response()->setStatusCode(201);
     }
 
     public function login(UserLoginRequest $request): UserResource
@@ -47,10 +48,10 @@ class UserController extends Controller
         $user = User::where('email', $data['email'])->first();
 
         // get check for databases
-        if(!$user || !Hash::check($data['password'], $user->password)){
-            throw new HttpResponseException (response([
-                "errors"=>[
-                    "message"=>[
+        if (!$user || !Hash::check($data['password'], $user->password)) {
+            throw new HttpResponseException(response([
+                "errors" => [
+                    "message" => [
                         "username or password wrong"
                     ]
                 ]
@@ -58,8 +59,8 @@ class UserController extends Controller
         }
 
         //Regenerate Access Token
-         
-        $user->token=Str::uuid()->toString();
+
+        $user->token = Str::uuid()->toString();
         $user->save();
 
         return new UserResource($user);
@@ -71,38 +72,38 @@ class UserController extends Controller
         return new UserResource($user);
     }
 
-    public function update(UserUpdateRequest $request){
+    public function update(UserUpdateRequest $request)
+    {
         //get data from request
         $data = $request->validated();
         //mengambil informasi user saat ini
         $user =  Auth::user();
 
-        if(isset($data['username'])){
+        if (isset($data['username'])) {
             $user->username = $data['username'];
         }
-        if(isset($data['name'])){
+        if (isset($data['name'])) {
             $user->name = $data['name'];
         }
-        if(isset($data['address'])){
+        if (isset($data['address'])) {
             $user->address = $data['address'];
         }
-        if(isset($data['phone'])){
+        if (isset($data['phone'])) {
             $user->phone = $data['phone'];
         }
-        if(isset($data['email'])){
+        if (isset($data['email'])) {
             $user->email = $data['email'];
         }
-        if(isset($data['password'])){
+        if (isset($data['password'])) {
             $user->password = Hash::make($data['password']);
         }
 
         $user->save();
-        return new UserResource ($user);
-    
+        return new UserResource($user);
     }
 
     //* Function untuk logout
-    public function logout(Request $request): JsonResponse 
+    public function logout(Request $request): JsonResponse
     {
         $user = Auth::user();
         $user->token = null;
@@ -111,7 +112,7 @@ class UserController extends Controller
         Auth::logout();
 
         return response()->json([
-            'data'=>true
+            'data' => true
         ])->setStatusCode(200);
     }
 }

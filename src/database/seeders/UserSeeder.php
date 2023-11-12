@@ -21,7 +21,8 @@ class UserSeeder extends Seeder
             'token' => 'fierencoll',
             'address' => 'antasia kingdom',
             'phone' => '123456',
-            'email' => 'fieren@gmail.com'
+            'email' => 'fieren@gmail.com',
+            'role_id' => 3,
         ]);
     }
 }
