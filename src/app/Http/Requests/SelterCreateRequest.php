@@ -6,14 +6,14 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class UserLoginRequest extends FormRequest
+class SelterCreateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return $this->user() != null;
     }
 
     /**
@@ -24,8 +24,17 @@ class UserLoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => ['required', 'max:100', 'email'],
-            'password' => ['required', 'max:100']
+            'name' => ['required', 'string', 'max:100'],
+            'picture' => ['nullable'],
+            'city' => ['required'],
+            'address' => ['required', 'string'],
+            'description' => ['nullable'],
+            'sosial_media_1' => ['nullable'],
+            'sosial_media_2' => ['nullable'],
+            'sosial_media_3' => ['nullable'],
+            'phone' => ['required'],
+            'let' => ['required'],
+            'lon' => ['required'],
         ];
     }
 

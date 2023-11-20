@@ -11,19 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('selters', function (Blueprint $table) {
+        Schema::create('services', function (Blueprint $table) {
             $table->id();
+            $table->string('picture')->nullable();
             $table->string('name')->nullable(false);
-            $table->string('picture')->nullable(false);
-            $table->string('address')->nullable(false);
-            $table->text('description')->nullable(false);
             $table->string('sosial_media_1')->nullable();
             $table->string('sosial_media_2')->nullable();
             $table->string('sosial_media_3')->nullable();
-            $table->string('phone')->nullable(false);
-            $table->string('city')->nullable(false);
-            $table->string('lon')->nullable(false);
-            $table->string('let')->nullable(false);
+            $table->string('description')->nullable();
+            $table->string('city')->nullable();
+            $table->string('address')->nullable();
+            $table->string('phone')->nullable();
+            $table->double('lon')->nullable(false);
+            $table->double('let')->nullable(false);
             $table->timestamps();
         });
     }
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('selters');
+        Schema::dropIfExists('services');
     }
 };

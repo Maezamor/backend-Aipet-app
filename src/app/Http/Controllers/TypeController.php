@@ -10,9 +10,9 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class TypeController extends Controller
 {
-    public function get(): JsonResponse
+    public function get(int $page = 1, int $limit = 10): JsonResponse
     {
-        $type = Type::all();
+        $type = Type::paginate($limit, ["*"], "page", $page);
 
         return response()->json([
             "data" => $type
@@ -21,7 +21,9 @@ class TypeController extends Controller
     public function create(Request $request): JsonResponse
     {
         $validator =  Validator::make($request->all(), [
-            'type' => 'required|string|max:50'
+            'type' => 'required|string|max:50',
+            'kelompok' => 'required|string|max:50',
+            'group' => 'required|string|max:50'
         ]);
 
         if ($validator->fails()) {
@@ -29,7 +31,9 @@ class TypeController extends Controller
         }
 
         $type = Type::create([
-            'type' => $request->type
+            'type' => $request->type,
+            'kelompok' => $request->kelompok,
+            'group' => $request->group
         ]);
 
         return response()->json([
@@ -40,7 +44,9 @@ class TypeController extends Controller
     public function update(int $id, Request $request): JsonResponse
     {
         $validator =  Validator::make($request->all(), [
-            'type' => 'required|string|max:50'
+            'type' => 'required|string|max:50',
+            'kelompok' => 'required|string|max:50',
+            'group' => 'required|string|max:50'
         ]);
 
         if ($validator->fails()) {
@@ -52,9 +58,10 @@ class TypeController extends Controller
             return response()->json(['errors' => ['message' => 'not found']], 404);
         }
         $type->update([
-            'type' => $request->type
+            'type' => $request->type,
+            'kelompok' => $request->kelompok,
+            'group' => $request->group
         ]);
-        $type->save();
 
         return response()->json([
             "data" => $type

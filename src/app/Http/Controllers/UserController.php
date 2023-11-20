@@ -35,6 +35,7 @@ class UserController extends Controller
 
         // go to create user
         $user = new User($data);
+        $user->role_id = 3;
         $user->password = Hash::make($data['password']);
         // go create
         $user->save();
@@ -72,10 +73,20 @@ class UserController extends Controller
         return new UserResource($user);
     }
 
-    public function update(UserUpdateRequest $request)
+    public function update(UserUpdateRequest $request): UserResource
     {
         //get data from request
+        if ($request->header('Content-Type') !== 'application/json') {
+            throw new HttpResponseException(response([
+                'errors' => [
+                    'message' => [
+                        'Invalid content Type'
+                    ]
+                ]
+            ])->setStatusCode(400));
+        }
         $data = $request->validated();
+
         //mengambil informasi user saat ini
         $user =  Auth::user();
 
@@ -106,10 +117,10 @@ class UserController extends Controller
     public function logout(Request $request): JsonResponse
     {
         $user = Auth::user();
-        $user->token = null;
-        $user->save();
 
-        Auth::logout();
+        $users =  User::find($user->id);
+        $users->token = null;
+        $users->save();
 
         return response()->json([
             'data' => true

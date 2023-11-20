@@ -22,7 +22,8 @@ class DogResource extends JsonResource
             "character" => $this->character,
             "picture" => $this->picture,
             "type_id" => $this->type_id,
-            "gender_id" => $this->gender_id,
+            "gender" => $this->gender,
+            "steril_id" => $this->steril_id,
             "selter_id" => $this->selter_id,
         ];
     }

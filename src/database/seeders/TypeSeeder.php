@@ -16,12 +16,20 @@ class TypeSeeder extends Seeder
         $type = [
             [
                 "type" => "Buldock",
+                "kelompok" => "anjing lucu",
+                "group" => "working",
+
             ],
             [
                 "type" => "Basmut",
+                "kelompok" =>  "Anjing Besar",
+                "group" => "herding",
+
             ],
             [
                 "type" => "helder",
+                "kelompok" => "anjing kecil",
+                "group" => "toy",
             ]
         ];
 

@@ -30,8 +30,9 @@ class DogCreatedRequest extends FormRequest
             "character" => ["nullable"],
             "picture" => ["required"],
             "type_id" => ["required"],
-            "gender_id" => ["required"],
+            "gender" => ["required"],
             "selter_id" => ["required"],
+            "steril_id" => ["required"],
         ];
     }
 

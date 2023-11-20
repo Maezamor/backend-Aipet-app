@@ -12,4 +12,13 @@ class Role extends Model
     protected $table = "roles";
     public $incrementing = true;
     public $timestamps = true;
+
+    protected $fillable = [
+        'role'
+    ];
+
+    public function users()
+    {
+        return $this->hasMany(User::class, 'id', 'role_id');
+    }
 }

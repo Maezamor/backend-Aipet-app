@@ -34,7 +34,7 @@ services:
         environment: 
             MYSQL_DATABASE: laravel_docker
             MYSQL_USER: user
-            MYSQL_PASSWORD: useM
+            MYSQL_PASSWORD: user
             MYSQL_ROOT_PASSWORD: root
             SERVICE_TAGS: dev
             SERVICE_NAME: mysql

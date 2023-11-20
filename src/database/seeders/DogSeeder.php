@@ -20,8 +20,9 @@ class DogSeeder extends Seeder
                 "age" => "4",
                 "rescue_story" => "Konyako adalah anjing yang penurut namun karena tuanya sudah meninggal dia tampak murung dan tidak bersemnagat lagi",
                 "character" => "pendiam, penurut",
+                "gender" => "Male",
                 "type_id" => 1,
-                "gender_id" => 1,
+                "steril_id" => 1,
                 "selter_id" => 1,
             ],
             [
@@ -30,8 +31,9 @@ class DogSeeder extends Seeder
                 "age" => "5",
                 "rescue_story" => "Kotsuke adalah anjing yang garang karena dulunya perna dipukuli oleh pemilik dan warga sekitar, kami menemukanya terluka dipinggir jalan",
                 "character" => "tegas, garang",
+                "gender" => "Female",
                 "type_id" => 2,
-                "gender_id" => 2,
+                "steril_id" => 2,
                 "selter_id" => 1,
             ]
         ];

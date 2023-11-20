@@ -30,14 +30,16 @@ class UserRegisterRequest extends FormRequest
             'name' => ['required', 'max:100'],
             'address' => ['required', 'max:200'],
             'phone' => ['required', 'max:15'],
-            'email' => ['required', 'max:50','email'],
+            'email' => ['required', 'max:50', 'email'],
             'password' => ['required', 'max:100'],
+
         ];
     }
 
     // retrun errors of there unvalidation
 
-    protected function failedValidation (Validator $validator){
+    protected function failedValidation(Validator $validator)
+    {
         throw new HttpResponseException(response([
             "errors" => $validator->getMessageBag()
         ], 400));

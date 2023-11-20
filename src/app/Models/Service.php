@@ -5,22 +5,25 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Type extends Model
+class Service extends Model
 {
     protected $primaryKey = "id";
     protected $keyType = "int";
-    protected $table = "types";
+    protected $table = "services";
     public $incrementing = true;
     public $timestamps = true;
 
     protected $fillable = [
-        'type',
-        'kelompok',
-        'group'
+        "picture",
+        "name",
+        "sosial_media_1",
+        "sosial_media_2",
+        "sosial_media_3",
+        "description",
+        "city",
+        "address",
+        "pone",
+        'lon',
+        'let'
     ];
-
-    public function Dog()
-    {
-        return $this->hasMany(Dog::class);
-    }
 }

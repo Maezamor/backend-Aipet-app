@@ -18,8 +18,9 @@ return new class extends Migration
             $table->text('rescue_story')->nullable(false);
             $table->string('character')->nullable();
             $table->string('picture')->nullable(false);
+            $table->string('gender')->nullable(false);
             $table->unsignedBigInteger("type_id")->nullable(false);
-            $table->unsignedBigInteger("gender_id")->nullable(false);
+            $table->unsignedBigInteger("steril_id")->nullable(false);
             $table->unsignedBigInteger("selter_id")->nullable(false);
             $table->timestamps();
         });

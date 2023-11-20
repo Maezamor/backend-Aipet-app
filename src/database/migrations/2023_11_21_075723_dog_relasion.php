@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('dogs', function (Blueprint $table) {
             $table->foreign('type_id')->references('id')->on('types');
-            $table->foreign('gender_id')->references('id')->on('genders');
+            $table->foreign('steril_id')->references('id')->on('sterlisations');
             $table->foreign('selter_id')->references('id')->on('selters');
         });
     }

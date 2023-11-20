@@ -19,24 +19,27 @@ class Dog extends Model
         "age",
         "rescue_story",
         "character",
+        "sterilisasi",
         "picture",
+        "gender",
         "type_id",
-        "gender_id",
         "selter_id",
+        "steril_id"
     ];
     //relasion definition
 
-    public function type(): BelongsTo
+    public function type()
     {
-        return $this->belongsTo(Type::class, "type_id", "id");
+        return $this->belongsTo(Type::class);
     }
 
-    public function gender(): BelongsTo
+    public function selter()
     {
-        return $this->belongsTo(Gender::class, "dender_id", "id");
+        return $this->belongsTo(Selter::class);
     }
-    public function selter(): BelongsTo
+
+    public function sterlisation()
     {
-        return $this->belongsTo(Selter::class, "selter_id", "id");
+        return $this->belongsTo(Sterlisation::class);
     }
 }
