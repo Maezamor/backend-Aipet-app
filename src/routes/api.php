@@ -71,8 +71,8 @@ Route::middleware(ApiAuthMiddleware::class)->group(function () {
     Route::delete('/admin/type/{id}', [TypeController::class, 'delete'])->where('id', '[0-9]+');
 
     // Api Sterilisation Controller
-    Route::get('/admin/sterils/{page?}/{limit?}', [SterillizationController::class, 'get']);
+    Route::get('/admin/sterils/{page}/{limit}/list', [SterillizationController::class, 'get']);
     Route::post('/admin/sterils/create', [SterillizationController::class, 'create']);
     Route::put('/admin/sterils/{id}', [SterillizationController::class, 'update'])->where('id', '[0-9]+');
-    Route::delete('/admin/sterils/{id}', [SterillizationController::class, 'update'])->where('id', '[0-9]+');
+    Route::delete('/admin/sterils/{id}', [SterillizationController::class, 'delete'])->where('id', '[0-9]+');
 });

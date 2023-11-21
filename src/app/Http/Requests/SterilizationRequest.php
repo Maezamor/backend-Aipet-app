@@ -24,7 +24,7 @@ class SterilizationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['require', 'string', 'max:100']
+            'name' => ['required', 'string', 'max:100', 'unique:sterlisations'],
         ];
     }
 

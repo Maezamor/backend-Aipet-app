@@ -35,7 +35,8 @@ class SterillizationController extends Controller
         $data =  $request->validated();
 
         $steril =  Sterlisation::create([
-            'name' => $request->name
+            'name' => $request->name,
+
         ]);
 
         return response()->json([
@@ -45,6 +46,7 @@ class SterillizationController extends Controller
 
     public function update(int $id, SterilizationUpdate $request): JsonResponse
     {
+
         if (!$id) {
             throw new HttpResponseException(response([
                 'errors' => [
@@ -56,7 +58,7 @@ class SterillizationController extends Controller
         }
         $data = $request->validated();
 
-        $steril = Sterlisation::find($data->id);
+        $steril = Sterlisation::find($id);
 
         if (!$steril) {
             throw new HttpResponseException(response([
@@ -74,7 +76,7 @@ class SterillizationController extends Controller
 
         return response()->json([
             'data' => $steril
-        ])->statusCode(200);
+        ])->setStatusCode(200);
     }
 
     public function delete(int $id): JsonResponse
