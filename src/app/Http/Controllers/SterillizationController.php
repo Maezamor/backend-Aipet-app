@@ -15,15 +15,15 @@ class SterillizationController extends Controller
     {
         $result = Sterlisation::paginate($page, ['*'], 'page', $limit);
 
-        if ($result->isEmpty()) {
-            throw new HttpResponseException(response([
-                'errors' => [
-                    'message' => [
-                        'you not have data'
-                    ]
-                ]
-            ])->setStatusCode(404));
-        }
+        // if ($result->isEmpty()) {
+        //     throw new HttpResponseException(response([
+        //         'errors' => [
+        //             'message' => [
+        //                 'you not have data'
+        //             ]
+        //         ]
+        //     ])->setStatusCode(404));
+        // }
 
         return response()->json([
             'data' => $result

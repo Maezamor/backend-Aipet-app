@@ -194,6 +194,10 @@ class DogController extends Controller
             $query->where('gender', $request->input('gender'));
         }
 
+        if ($request->has("character")) {
+            $query->where('character', $request->input('character'));
+        }
+
         if ($request->has("age")) {
             $query->where('age', $request->input('age'));
         }
@@ -204,10 +208,10 @@ class DogController extends Controller
             });
         }
 
-        //default pagination
 
 
         $dogs =  $query->paginate($limit, ['*'], 'page', $page);
+
 
         if (!$dogs) {
             throw new HttpResponseException(response()->json([

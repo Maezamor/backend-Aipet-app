@@ -65,7 +65,7 @@ Route::middleware(ApiAuthMiddleware::class)->group(function () {
     Route::delete('service/{id}', [ServiceController::class, 'delete'])->where('id', '[0-9]+');
 
     //  Api mengelola tabel type
-    Route::get('/admin/type/{page?}/{limit?}', [TypeController::class, 'get']);
+    Route::get('/admin/type/{page}/{limit}/list', [TypeController::class, 'get']);
     Route::post('/admin/type/create', [TypeController::class, 'create']);
     Route::put('/admin/type/{id}', [TypeController::class, 'update'])->where('id', '[0-9]+');
     Route::delete('/admin/type/{id}', [TypeController::class, 'delete'])->where('id', '[0-9]+');

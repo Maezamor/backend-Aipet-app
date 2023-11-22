@@ -97,6 +97,16 @@ class SelterController extends Controller
     public function delete(int $id): JsonResponse
     {
         $selter = Selter::find($id);
+
+        if (!$selter) {
+            throw new HttpResponseException(response()->json([
+                "errors" => [
+                    "message" => [
+                        "not found"
+                    ]
+                ]
+            ])->setStatusCode(404));
+        }
         $selter->delete();
 
         return response()->json([

@@ -19,7 +19,6 @@ class Dog extends Model
         "age",
         "rescue_story",
         "character",
-        "sterilisasi",
         "picture",
         "gender",
         "type_id",
