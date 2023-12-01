@@ -1,0 +1,1775 @@
+{
+	"info": {
+		"_postman_id": "70e80772-30fc-4bab-aeec-41461b57b69d",
+		"name": "TestAipetApi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23179008",
+		"_collection_link": "https://lunar-station-607295.postman.co/workspace/Aipet-Testing~1371022e-46b2-4f5d-87eb-72b1fd0dc021/collection/23179008-70e80772-30fc-4bab-aeec-41461b57b69d?action=share&source=collection_link&creator=23179008"
+	},
+	"item": [
+		{
+			"name": "Type Testing",
+			"item": [
+				{
+					"name": "Get Type",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{auth}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url_local}}/api/admin/type",
+							"host": [
+								"{{url_local}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"type"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Type",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{auth}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "type",
+									"value": "{{type}}",
+									"type": "text"
+								},
+								{
+									"key": "kelompok",
+									"value": "{{kelompok}}",
+									"type": "text"
+								},
+								{
+									"key": "group",
+									"value": "{{group}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url_local}}/api/admin/type/create",
+							"host": [
+								"{{url_local}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"type",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{auth}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"type\" : \"bismuut\",\r\n    \"kelompok\" : \"anjing besar\",\r\n    \"group\" : \"toy\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_local}}/api/admin/type/{{find_id}}",
+							"host": [
+								"{{url_local}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"type",
+								"{{find_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Type",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{auth}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url_local}}/api/admin/type/5",
+							"host": [
+								"{{url_local}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"type",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Selter Testing",
+			"item": [
+				{
+					"name": "Get Selter Testing",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{auth}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url_local}}/api/selter/list?page=1&limit=10",
+							"host": [
+								"{{url_local}}"
+							],
+							"path": [
+								"api",
+								"selter",
+								"list"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Detail",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{auth}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url_local}}/api/selter?id=1",
+							"host": [
+								"{{url_local}}"
+							],
+							"path": [
+								"api",
+								"selter"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create selter testing",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{auth}}",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "picture",
+									"value": "{{picture}}",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "{{selter_name}}",
+									"type": "text"
+								},
+								{
+									"key": "sosial_media_1",
+									"value": "{{sosial_media_1}}",
+									"type": "text"
+								},
+								{
+									"key": "sosial_media_2",
+									"value": "{{sosial_media_2}}",
+									"type": "text"
+								},
+								{
+									"key": "sosial_media_3",
+									"value": "{{sosial_media_3}}",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "{{deskripsi_service}}",
+									"type": "text"
+								},
+								{
+									"key": "city",
+									"value": "{{city_service}}",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "{{address_service}}",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "{{phone_service}}",
+									"type": "text"
+								},
+								{
+									"key": "lon",
+									"value": "{{lon}}",
+									"type": "text"
+								},
+								{
+									"key": "let",
+									"value": "{{let}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url_local}}/api/selter/create",
+							"host": [
+								"{{url_local}}"
+							],
+							"path": [
+								"api",
+								"selter",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Selter Testing",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{auth}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"nama\" : \"Jaki Selter\",\r\n   \"picture\" : \"Jaki.png\",\r\n   \"address\" : \"Denpasar, Bali\",\r\n   \"description\" : \"Kami adalah pencita hewan, adopsi hewan disini!\",\r\n   \"sosial_media_1\" : \"facebook\",\r\n   \"sosial_media_2\" : \"instagram\",\r\n   \"sosial_media_3\" : \"aipet.id\",\r\n   \"phone\" : \"08129737987\",\r\n   \"city\": \"Denpasar\",\r\n   \"lon\" : -7.12312,\r\n   \"let\" : 123.1231\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_local}}/api/selter?id=1",
+							"host": [
+								"{{url_local}}"
+							],
+							"path": [
+								"api",
+								"selter"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{auth}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url_local}}/api/selter?id=1",
+							"host": [
+								"{{url_local}}"
+							],
+							"path": [
+								"api",
+								"selter"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Service Testing",
+			"item": [
+				{
+					"name": "Get Service",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{auth}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url_local}}/api/service/list?page=1&limit=10",
+							"host": [
+								"{{url_local}}"
+							],
+							"path": [
+								"api",
+								"service",
+								"list"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Detail",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{auth}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url_local}}/api/service/detail/1",
+							"host": [
+								"{{url_local}}"
+							],
+							"path": [
+								"api",
+								"service",
+								"detail",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Service",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{auth}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "picture",
+									"value": "{{picture}}",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "{{name_service}}",
+									"type": "text"
+								},
+								{
+									"key": "sosial_media_1",
+									"value": "{{sosial_media_1}}",
+									"type": "text"
+								},
+								{
+									"key": "sosial_media_2",
+									"value": "{{sosial_media_2}}",
+									"type": "text"
+								},
+								{
+									"key": "sosial_media_3",
+									"value": "{{sosial_media_3}}",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "{{deskripsi_service}}",
+									"type": "text"
+								},
+								{
+									"key": "city",
+									"value": "{{city_service}}",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "{{address_service}}",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "{{phone}}",
+									"type": "text"
+								},
+								{
+									"key": "lon",
+									"value": "{{lon}}",
+									"type": "text"
+								},
+								{
+									"key": "let",
+									"value": "{{let}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url_local}}/api/service/create",
+							"host": [
+								"{{url_local}}"
+							],
+							"path": [
+								"api",
+								"service",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{auth}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "picture",
+									"value": "Sableng_clinic.png",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "Sableng Clinic",
+									"type": "text"
+								},
+								{
+									"key": "sosial_media_1",
+									"value": "Sableng_fb",
+									"type": "text"
+								},
+								{
+									"key": "sosial_media_2",
+									"value": "Sableng_ig",
+									"type": "text"
+								},
+								{
+									"key": "sosial_media_3",
+									"value": "Sableng_tiktok",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Melayani kebiri anjing dan masalah anjing lainya",
+									"type": "text"
+								},
+								{
+									"key": "city",
+									"value": "Pasuruan",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "Bangil",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "0837463746",
+									"type": "text"
+								},
+								{
+									"key": "lon",
+									"value": "-4.14214",
+									"type": "text"
+								},
+								{
+									"key": "let",
+									"value": "-5.12344",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url_local}}/api/service/{{find_id}}",
+							"host": [
+								"{{url_local}}"
+							],
+							"path": [
+								"api",
+								"service",
+								"{{find_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{auth}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{url_local}}/api/service/1",
+							"host": [
+								"{{url_local}}"
+							],
+							"path": [
+								"api",
+								"service",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User Testing",
+			"item": [
+				{
+					"name": "Sign Up",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status time less than 1000ms\", function(){\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response body should js less than 500ms\", function(){\r",
+									"    pm.response.to.have.jsonBody();\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content Type is present and has value aplication/json\", function(){\r",
+									"    pm.response.to.have.header(\"Content-Type\", \"aplication/json\");\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "{{username}}",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "{{name}}",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "{{address}}",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "{{phone}}",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "{{email}}",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "text"
+								},
+								{
+									"key": "role_id",
+									"value": "{{role_id}}",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url_local}}/api/users",
+							"host": [
+								"{{url_local}}"
+							],
+							"path": [
+								"api",
+								"users"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "{{username}}",
+									"disabled": true
+								},
+								{
+									"key": "name",
+									"value": "{{name}}",
+									"disabled": true
+								},
+								{
+									"key": "address",
+									"value": "{{address}}",
+									"disabled": true
+								},
+								{
+									"key": "phone",
+									"value": "{{phone}}",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "{{email}}",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"disabled": true
+								},
+								{
+									"key": "role_id",
+									"value": "{{role_id}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sign in",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "{{email}}",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url_local}}/api/users/login",
+							"host": [
+								"{{url_local}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"login"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "{{email}}",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Current Users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status time less than 1000ms\", function(){\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response body should js less than 500ms\", function(){\r",
+									"    pm.response.to.have.jsonBody();\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content Type is present and has value aplication/json\", function(){\r",
+									"    pm.response.to.have.header(\"Content-Type\", \"aplication/json\");\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{auth}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url_local}}/api/users/current",
+							"host": [
+								"{{url_local}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"current"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Current Users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status time less than 1000ms\", function(){\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response body should js less than 500ms\", function(){\r",
+									"    pm.response.to.have.jsonBody();\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content Type is present and has value aplication/json\", function(){\r",
+									"    pm.response.to.have.header(\"Content-Type\", \"aplication/json\");\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{auth}}",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"ruby Joko\",\r\n    \"address\" : \"waru, Sidoarjo\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_local}}/api/users/current",
+							"host": [
+								"{{url_local}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"current"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status time less than 1000ms\", function(){\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response body should js less than 500ms\", function(){\r",
+									"    pm.response.to.have.jsonBody();\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content Type is present and has value aplication/json\", function(){\r",
+									"    pm.response.to.have.header(\"Content-Type\", \"aplication/json\");\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "dbc5e58f-5b5f-4900-80aa-4727cb9a6040",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://192.168.100.8:8000/api/users/logout",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"100",
+								"8"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Dog Testing",
+			"item": [
+				{
+					"name": "create_dog",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status time less than 1000ms\", function(){\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response body should js less than 500ms\", function(){\r",
+									"    pm.response.to.have.jsonBody();\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content Type is present and has value aplication/json\", function(){\r",
+									"    pm.response.to.have.header(\"Content-Type\", \"aplication/json\");\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{auth}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "{{dog_name}}",
+									"type": "text"
+								},
+								{
+									"key": "age",
+									"value": "{{age}}",
+									"type": "text"
+								},
+								{
+									"key": "rescue_story",
+									"value": "{{rescue_strory}}",
+									"type": "text"
+								},
+								{
+									"key": "character",
+									"value": "{{character}}",
+									"type": "text"
+								},
+								{
+									"key": "type_id",
+									"value": "{{type_id}}",
+									"type": "text"
+								},
+								{
+									"key": "steril_id",
+									"value": "{{steril_id}}",
+									"type": "text"
+								},
+								{
+									"key": "selter_id",
+									"value": "{{selter_id}}",
+									"type": "text"
+								},
+								{
+									"key": "picture",
+									"type": "file",
+									"src": "/C:/Users/ACER/OneDrive/Gambar/anime/logo_poliwangi.jpeg"
+								},
+								{
+									"key": "gender",
+									"value": "Male",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url_local}}/api/dogs/create",
+							"host": [
+								"{{url_local}}"
+							],
+							"path": [
+								"api",
+								"dogs",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Detail Dog",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status time less than 1000ms\", function(){\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response body should js less than 500ms\", function(){\r",
+									"    pm.response.to.have.jsonBody();\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content Type is present and has value aplication/json\", function(){\r",
+									"    pm.response.to.have.header(\"Content-Type\", \"aplication/json\");\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{auth}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url_local}}/api/dogs?id=1584",
+							"host": [
+								"{{url_local}}"
+							],
+							"path": [
+								"api",
+								"dogs"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1584"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "seacrh engine",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status time less than 1000ms\", function(){\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response body should js less than 500ms\", function(){\r",
+									"    pm.response.to.have.jsonBody();\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content Type is present and has value aplication/json\", function(){\r",
+									"    pm.response.to.have.header(\"Content-Type\", \"aplication/json\");\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{auth}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "query",
+									"value": "non-sporting",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url_local}}/api/dogs/search?page=1&limit=10",
+							"host": [
+								"{{url_local}}"
+							],
+							"path": [
+								"api",
+								"dogs",
+								"search"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateDog",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status time less than 1000ms\", function(){\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response body should js less than 500ms\", function(){\r",
+									"    pm.response.to.have.jsonBody();\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content Type is present and has value aplication/json\", function(){\r",
+									"    pm.response.to.have.header(\"Content-Type\", \"aplication/json\");\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{auth}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "character",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"Joko\",\r\n    \"age\" : \"1\",\r\n    \"rescue_story\" : \"manusia malang\",\r\n    \"character\" : \"periang, baik\",\r\n    \"picture\" : \"macan.jpg\",\r\n    \"type_id\" : 1,\r\n    \"gender\" : \"Female\",\r\n    \"steril_id\" : 1,\r\n    \"selter_id\" : 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_local}}/api/dogs?id=7",
+							"host": [
+								"{{url_local}}"
+							],
+							"path": [
+								"api",
+								"dogs"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "7"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{auth}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url_local}}/api/dogs?id=1",
+							"host": [
+								"{{url_local}}"
+							],
+							"path": [
+								"api",
+								"dogs"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Dog With filterTesting",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{auth}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url_local}}/api/dogs/filter?page=1&limit=10&type=Pomeranian",
+							"host": [
+								"{{url_local}}"
+							],
+							"path": [
+								"api",
+								"dogs",
+								"filter"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "type",
+									"value": "Pomeranian"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get rescue",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{auth}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url_local}}/api/dogs/rescue",
+							"host": [
+								"{{url_local}}"
+							],
+							"path": [
+								"api",
+								"dogs",
+								"rescue"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Onborading End",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{auth}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url_local}}/api/onboarding/end",
+							"host": [
+								"{{url_local}}"
+							],
+							"path": [
+								"api",
+								"onboarding",
+								"end"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Sterilizatiom tester",
+			"item": [
+				{
+					"name": "get list",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{auth}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url_local}}/api/admin/sterils/list?page=1&limit=10",
+							"host": [
+								"{{url_local}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"sterils",
+								"list"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Created",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{auth}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "{{name_steril}}",
+									"type": "text"
+								},
+								{
+									"key": "kelompok",
+									"value": "{{kelompok}}",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "group",
+									"value": "{{group}}",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url_local}}/api/admin/sterils/create",
+							"host": [
+								"{{url_local}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"sterils",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{auth}}",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"Hylos\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_local}}/api/admin/sterils?id=1",
+							"host": [
+								"{{url_local}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"sterils"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{auth}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url_local}}/api/admin/sterils?id=1",
+							"host": [
+								"{{url_local}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"sterils"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Personality",
+			"item": [
+				{
+					"name": "get",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{auth}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url_local}}/api/admin/person/list",
+							"host": [
+								"{{url_local}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"person",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "detail",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{auth}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url_local}}/api/admin/person/7",
+							"host": [
+								"{{url_local}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"person",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{auth}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "question",
+									"value": "apa penilaian kamu tentang anjing?",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url_local}}/api/admin/person/create",
+							"host": [
+								"{{url_local}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"person",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{auth}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"question\": \"apa itu anjing\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_local}}/api/admin/person/update/1",
+							"host": [
+								"{{url_local}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"person",
+								"update",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{auth}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url_local}}/api/admin/person/delete/4",
+							"host": [
+								"{{url_local}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"person",
+								"delete",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "name",
+			"value": "ruby"
+		},
+		{
+			"key": "username",
+			"value": "rubycy"
+		},
+		{
+			"key": "address",
+			"value": "kenjeran, surabaya"
+		},
+		{
+			"key": "phone",
+			"value": "089231151241"
+		},
+		{
+			"key": "email",
+			"value": "ruby@gmail.com"
+		},
+		{
+			"key": "password",
+			"value": "ruby123"
+		},
+		{
+			"key": "role_id",
+			"value": "3"
+		},
+		{
+			"key": "auth",
+			"value": "cdc590b5-f9cc-443f-b6da-b696edcda4a6"
+		}
+	]
+}
