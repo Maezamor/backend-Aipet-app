@@ -1,14 +1,16 @@
 <?php
 
-use App\Http\Controllers\DogController;
-use App\Http\Controllers\SelterController;
-use App\Http\Controllers\ServiceController;
-use App\Http\Controllers\SterillizationController;
-use App\Http\Controllers\TypeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DogController;
+use App\Http\Controllers\TypeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\SelterController;
 use App\Http\Middleware\ApiAuthMiddleware;
+use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\OnboardingController;
+use App\Http\Controllers\SterillizationController;
+use App\Http\Controllers\PersonalityQuestionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,30 +41,35 @@ Route::middleware(ApiAuthMiddleware::class)->group(function () {
 
     //Api Dog Controller
     Route::post('/dogs/create', [DogController::class, 'create']);
-    Route::get('/dogs/{id}', [DogController::class, 'get'])->where('id', '[0-9]+'); //
-    Route::get('/dogs/{page}/{limit}/filter', [DogController::class, 'filter']);
-    Route::post('/dogs/{page}/{limit}/search', [DogController::class, 'search']);
-    Route::put('/dogs/{id}', [DogController::class, 'update'])->where('id', '[0-9]+');
-    Route::delete('/dogs/{id}', [DogController::class, 'delete'])->where('id', '[0-9]+');
+    Route::get('/dogs', [DogController::class, 'get'])->where('id', '[0-9]+'); //
+    Route::get('/dogs/filter', [DogController::class, 'filter']);
+    Route::post('/dogs/search', [DogController::class, 'search']);
+    Route::put('/dogs', [DogController::class, 'update'])->where('id', '[0-9]+');
+    Route::delete('/dogs', [DogController::class, 'delete'])->where('id', '[0-9]+');
+    Route::get('dogs/rescue', [DogController::class, 'getRescue']);
+
+    //onboarding
+    Route::get('onboarding/end', [OnboardingController::class, 'onboardingEnd']);
 
 
     // Api Adoption Controller
 
 
     // Api Selter Controller
-    Route::get('/selter/{page}/{limit}/list', [SelterController::class, 'get']);
-    Route::get('/selter/{id}', [SelterController::class, 'getDetail'])->where('id', '[0-9]+');
+    Route::get('/selter/list', [SelterController::class, 'get']);
+    Route::get('/selter', [SelterController::class, 'getDetail'])->where('id', '[0-9]+');
     Route::post('/selter/create', [SelterController::class, 'create']);
-    Route::put('selter/{id}', [SelterController::class, 'update'])->where('id', '[0-9]+');
-    Route::delete('selter/{id}', [SelterController::class, 'delete'])->where('id', '[0-9]+');
+    Route::put('/selter', [SelterController::class, 'update'])->where('id', '[0-9]+');
+    Route::delete('/selter', [SelterController::class, 'delete'])->where('id', '[0-9]+');
 
 
     // Api Service Controller
-    Route::get('/service/{page}/{limit}/list', [ServiceController::class, 'get']);
-    Route::get('/service/detail/{id}', [ServiceController::class, 'getDetail'])->where('id', '[0-9]+');
+    Route::get('/service/list', [ServiceController::class, 'get']);
+    Route::get('/service/detail', [ServiceController::class, 'getDetail'])->where('id', '[0-9]+');
     Route::post('/service/create', [ServiceController::class, 'create']);
-    Route::put('/service/{id}', [ServiceController::class, 'update'])->where('id', '[0-9]+');
-    Route::delete('service/{id}', [ServiceController::class, 'delete'])->where('id', '[0-9]+');
+    Route::put('/service', [ServiceController::class, 'update'])->where('id', '[0-9]+');
+    Route::delete('service', [ServiceController::class, 'delete'])->where('id', '[0-9]+');
+
 
     //  Api mengelola tabel type
     Route::get('/admin/type/{page}/{limit}/list', [TypeController::class, 'get']);
@@ -75,4 +82,11 @@ Route::middleware(ApiAuthMiddleware::class)->group(function () {
     Route::post('/admin/sterils/create', [SterillizationController::class, 'create']);
     Route::put('/admin/sterils/{id}', [SterillizationController::class, 'update'])->where('id', '[0-9]+');
     Route::delete('/admin/sterils/{id}', [SterillizationController::class, 'delete'])->where('id', '[0-9]+');
+
+    // API Personality Controller
+    Route::get('/admin/person/list', [PersonalityQuestionController::class, 'get']);
+    Route::get('/admin/person/{id}', [PersonalityQuestionController::class, 'getDetail'])->where('id', '[0-9]+');
+    Route::post('/admin/person/create', [PersonalityQuestionController::class, 'create']);
+    Route::put('/admin/person/update/{id}', [PersonalityQuestionController::class, 'update'])->where('id', '[0-9]+');
+    Route::delete('/admin/person/delete/{id}', [PersonalityQuestionController::class, 'delete'])->where('id', '[0-9]+');
 });

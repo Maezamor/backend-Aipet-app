@@ -11,10 +11,10 @@ use Illuminate\Http\Exceptions\HttpResponseException;
 
 class ServiceController extends Controller
 {
-    public function get(int $page = 1, int $limit = 10)
+    public function get(Request $request): JsonResponse
     {
 
-        $service = Service::paginate($limit, ['*'], 'page', $page);
+        $service = Service::paginate($request->limit, ['*'], 'page', $request->page);
 
         if (!$service) {
             throw new HttpResponseException(response()->json([
@@ -31,9 +31,9 @@ class ServiceController extends Controller
         ])->setStatusCode(200);
     }
 
-    public function getDetail(int $id)
+    public function getDetail(Request $request)
     {
-        if (!$id) {
+        if (!$request->id) {
             throw new HttpResponseException(response()->json([
                 "errors" => [
                     "message" => [
@@ -43,7 +43,7 @@ class ServiceController extends Controller
             ])->setStatusCode(404));
         }
 
-        $service = Service::find($id);
+        $service = Service::find($request->id);
         if (!$service) {
             throw new HttpResponseException(response()->json([
                 "errors" => [
@@ -70,9 +70,9 @@ class ServiceController extends Controller
         ])->setStatusCode(201);
     }
 
-    public function update(int $id, ServiceUpdateRequest $request): JsonResponse
+    public function update(ServiceUpdateRequest $request): JsonResponse
     {
-        if (!$id) {
+        if (!$request->id) {
             throw new HttpResponseException(response()->json([
                 "errors" => [
                     "message" => [
@@ -82,7 +82,7 @@ class ServiceController extends Controller
             ])->setStatusCode(400));
         }
 
-        $service = Service::find($id);
+        $service = Service::find($request->id);
 
         if (!$service) {
             throw new HttpResponseException(response()->json([
@@ -104,9 +104,9 @@ class ServiceController extends Controller
         ])->setStatusCode(200);
     }
 
-    public function delete(int $id): JsonResponse
+    public function delete(Request $request): JsonResponse
     {
-        if (!$id) {
+        if (!$request->id) {
             throw new HttpResponseException(response()->json([
                 "errors" => [
                     "message" => [
@@ -116,7 +116,7 @@ class ServiceController extends Controller
             ])->setStatusCode(400));
         }
 
-        $service = Service::find($id);
+        $service = Service::find($request->id);
         if (!$service) {
             throw new HttpResponseException(response()->json([
                 "errors" => [

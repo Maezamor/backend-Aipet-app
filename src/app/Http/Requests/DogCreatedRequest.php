@@ -28,7 +28,7 @@ class DogCreatedRequest extends FormRequest
             "age" => ["nullable", "max:3"],
             "rescue_story" => ["required"],
             "character" => ["nullable"],
-            "picture" => ["required"],
+            "picture" => ["required", "file"],
             "type_id" => ["required"],
             "gender" => ["required"],
             "selter_id" => ["required"],

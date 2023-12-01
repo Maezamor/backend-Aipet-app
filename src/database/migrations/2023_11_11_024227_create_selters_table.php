@@ -22,9 +22,10 @@ return new class extends Migration
             $table->string('sosial_media_3')->nullable();
             $table->string('phone')->nullable(false);
             $table->string('city')->nullable(false);
-            $table->string('lon')->nullable(false);
-            $table->string('let')->nullable(false);
+            $table->double('lon')->nullable(false);
+            $table->double('let')->nullable(false);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

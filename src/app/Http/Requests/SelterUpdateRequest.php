@@ -24,6 +24,7 @@ class SelterUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'id' => ['required'],
             'name' => ['nullable', 'string', 'max:100'],
             'address' => ['nullable', 'string'],
             'picture' => ['nullable'],

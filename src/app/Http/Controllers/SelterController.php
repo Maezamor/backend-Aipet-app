@@ -12,9 +12,9 @@ use Illuminate\Support\Facades\Validator;
 
 class SelterController extends Controller
 {
-    public function get(int $page = 1, int $limit = 10): JsonResponse
+    public function get(Request $request): JsonResponse
     {
-        $selter =  Selter::paginate($limit, ['*'], 'page', $page);
+        $selter =  Selter::paginate($request->limit, ['*'], 'page', $request->page);
 
         if (!$selter) {
             throw new HttpResponseException(response()->json([
@@ -31,9 +31,9 @@ class SelterController extends Controller
         ])->setStatusCode(200);
     }
 
-    public function getDetail(int $id): JsonResponse
+    public function getDetail(Request $request): JsonResponse
     {
-        $selter = Selter::find($id);
+        $selter = Selter::find($request->id);
         if (!$selter) {
             throw new HttpResponseException(response()->json([
                 'errors' => [
@@ -64,9 +64,10 @@ class SelterController extends Controller
         ])->setStatusCode(201);
     }
 
-    public function update(int $id, SelterUpdateRequest $request): JsonResponse
+    public function update(SelterUpdateRequest $request): JsonResponse
     {
-        if (!$id) {
+
+        if (!$request->id) {
             throw new HttpResponseException(response()->json([
                 "errors" => [
                     "message" => [
@@ -75,7 +76,8 @@ class SelterController extends Controller
                 ]
             ])->setStatusCode(404));
         }
-        $selter = Selter::find($id);
+        $selter = Selter::find($request->id);
+
         if (!$selter) {
             throw new HttpResponseException(response()->json([
                 "errors" => [
@@ -94,9 +96,9 @@ class SelterController extends Controller
         ])->setStatusCode(200);
     }
 
-    public function delete(int $id): JsonResponse
+    public function delete(Request $request): JsonResponse
     {
-        $selter = Selter::find($id);
+        $selter = Selter::find($request->id);
 
         if (!$selter) {
             throw new HttpResponseException(response()->json([

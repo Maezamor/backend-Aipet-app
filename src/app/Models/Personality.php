@@ -2,28 +2,23 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Type extends Model
+class Personality extends Model
 {
     use SoftDeletes;
 
     protected $primaryKey = "id";
     protected $keyType = "int";
-    protected $table = "types";
+    protected $table = "personalities";
     public $incrementing = true;
     public $timestamps = true;
 
-    protected $fillable = [
-        'type',
-        'kelompok',
-        'group'
-    ];
 
-    public function Dog()
-    {
-        return $this->hasMany(Dog::class);
-    }
+    protected $fillable = [
+        "code_ques",
+        "question"
+    ];
 }

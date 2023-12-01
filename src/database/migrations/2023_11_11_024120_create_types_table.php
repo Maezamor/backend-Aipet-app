@@ -14,9 +14,11 @@ return new class extends Migration
         Schema::create('types', function (Blueprint $table) {
             $table->id();
             $table->string('type', 50)->nullable(false);
-            $table->string('kelompok', 100)->nullable(false);
-            $table->string('group', 100)->nullable(false);
+            $table->string('size', 50)->nullable(false);
+            $table->string('activity_level', 50)->nullable(false);
+            $table->string('groups', 100)->nullable(false);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

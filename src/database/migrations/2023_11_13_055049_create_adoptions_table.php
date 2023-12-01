@@ -13,7 +13,10 @@ return new class extends Migration
     {
         Schema::create('adoptions', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('dog_id')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

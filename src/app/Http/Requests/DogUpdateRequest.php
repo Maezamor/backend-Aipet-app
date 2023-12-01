@@ -25,6 +25,7 @@ class DogUpdateRequest extends FormRequest
     {
 
         return [
+            "id" => ["required"],
             "name" => ["required", "max:50"],
             "age" => ["nullable", "max:3"],
             "rescue_story" => ["required"],

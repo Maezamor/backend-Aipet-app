@@ -3,11 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class User extends Model implements Authenticatable
 {
+    use SoftDeletes;
+
     //inisialitation fungsionalitas target database
     protected $table = 'users';
     protected $primaryKey = "id";

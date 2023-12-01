@@ -24,6 +24,7 @@ class ServiceUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'id' => ['required'],
             'picture' => ['nullable'],
             'name' =>  ['nullable', 'max:100'],
             'sosial_media_1' => ['nullable'],

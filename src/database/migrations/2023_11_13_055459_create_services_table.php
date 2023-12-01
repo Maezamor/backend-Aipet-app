@@ -25,6 +25,7 @@ return new class extends Migration
             $table->double('lon')->nullable(false);
             $table->double('let')->nullable(false);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

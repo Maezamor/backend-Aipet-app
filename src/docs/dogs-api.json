@@ -27,26 +27,41 @@
                             "schema": {
                                 "type": "object",
                                 "properties": {
-                                    "nama": {
+                                    "name": {
                                         "type": "string"
                                     },
-                                    "umur": {
+                                    "age": {
                                         "type": "string"
-                                    },
-                                    "id_jenis": {
-                                        "type": "number"
-                                    },
-                                    "id_selter": {
-                                        "type": "number"
-                                    },
-                                    "id_gender": {
-                                        "type": "number"
                                     },
                                     "rescue_story": {
-                                        "type": "text"
+                                        "type": "string"
                                     },
                                     "character": {
                                         "type": "string"
+                                    },
+                                    "picture": {
+                                        "type": "text"
+                                    },
+                                    "type_id": {
+                                        "type": "number"
+                                    },
+                                    "selter_id": {
+                                        "type": "number"
+                                    },
+                                    "steril_id": {
+                                        "type": "number"
+                                    },
+                                    "character": {
+                                        "type": "string"
+                                    },
+                                    "create_at": {
+                                        "type": "number"
+                                    },
+                                    "update_at": {
+                                        "type": "number"
+                                    },
+                                    "delete_at": {
+                                        "type": "number"
                                     }
                                 }
                             }
@@ -67,20 +82,38 @@
                                                 "id": {
                                                     "type": "number"
                                                 },
-                                                "nama": {
+                                                "name": {
                                                     "type": "string"
                                                 },
-                                                "id_jenis": {
-                                                    "type": "number"
-                                                },
-                                                "id_selter": {
-                                                    "type": "number"
+                                                "age": {
+                                                    "type": "string"
                                                 },
                                                 "rescue_story": {
-                                                    "type": "text"
+                                                    "type": "string"
                                                 },
                                                 "character": {
                                                     "type": "string"
+                                                },
+                                                "picture": {
+                                                    "type": "text"
+                                                },
+                                                "type_id": {
+                                                    "type": "number"
+                                                },
+                                                "selter_id": {
+                                                    "type": "number"
+                                                },
+                                                "steril_id": {
+                                                    "type": "number"
+                                                },
+                                                "create_at": {
+                                                    "type": "number"
+                                                },
+                                                "update_at": {
+                                                    "type": "number"
+                                                },
+                                                "delete_at": {
+                                                    "type": "number"
                                                 }
                                             }
                                         },
@@ -100,32 +133,12 @@
                     {
                         "name": "Authorization",
                         "in": "header"
-                    },
-                    {
-                        "name": "name",
-                        "in": "query"
-                    },
-                    {
-                        "name": "jenis",
-                        "in": "query"
-                    },
-                    {
-                        "name": "caracter",
-                        "in": "query"
-                    },
-                    {
-                        "name": "size",
-                        "in": "query"
-                    },
-                    {
-                        "name": "page",
-                        "in": "query"
                     }
                 ],
                 "response": {
                     "200": {
                         "description": "Success search",
-                        "contet": {
+                        "content": {
                             "aplication/json": {
                                 "schema": {
                                     "type": "object",
@@ -138,20 +151,38 @@
                                                     "id": {
                                                         "type": "number"
                                                     },
-                                                    "nama": {
+                                                    "name": {
                                                         "type": "string"
                                                     },
-                                                    "id_jenis": {
-                                                        "type": "number"
-                                                    },
-                                                    "id_selter": {
-                                                        "type": "number"
+                                                    "age": {
+                                                        "type": "string"
                                                     },
                                                     "rescue_story": {
-                                                        "type": "text"
+                                                        "type": "string"
                                                     },
                                                     "character": {
                                                         "type": "string"
+                                                    },
+                                                    "picture": {
+                                                        "type": "text"
+                                                    },
+                                                    "type_id": {
+                                                        "type": "number"
+                                                    },
+                                                    "selter_id": {
+                                                        "type": "number"
+                                                    },
+                                                    "steril_id": {
+                                                        "type": "number"
+                                                    },
+                                                    "create_at": {
+                                                        "type": "number"
+                                                    },
+                                                    "update_at": {
+                                                        "type": "number"
+                                                    },
+                                                    "delete_at": {
+                                                        "type": "number"
                                                     }
                                                 }
                                             }
@@ -190,20 +221,29 @@
                             "schema": {
                                 "type": "object",
                                 "properties": {
-                                    "nama": {
+                                    "name": {
                                         "type": "string"
                                     },
-                                    "id_jenis": {
-                                        "type": "number"
-                                    },
-                                    "id_selter": {
-                                        "type": "number"
+                                    "age": {
+                                        "type": "string"
                                     },
                                     "rescue_story": {
-                                        "type": "text"
+                                        "type": "string"
                                     },
                                     "character": {
                                         "type": "string"
+                                    },
+                                    "picture": {
+                                        "type": "text"
+                                    },
+                                    "type_id": {
+                                        "type": "number"
+                                    },
+                                    "selter_id": {
+                                        "type": "number"
+                                    },
+                                    "steril_id": {
+                                        "type": "number"
                                     }
                                 }
                             }
@@ -224,20 +264,38 @@
                                                 "id": {
                                                     "type": "number"
                                                 },
-                                                "nama": {
+                                                "name": {
                                                     "type": "string"
                                                 },
-                                                "id_jenis": {
-                                                    "type": "number"
-                                                },
-                                                "id_selter": {
-                                                    "type": "number"
+                                                "age": {
+                                                    "type": "string"
                                                 },
                                                 "rescue_story": {
-                                                    "type": "text"
+                                                    "type": "string"
                                                 },
                                                 "character": {
                                                     "type": "string"
+                                                },
+                                                "picture": {
+                                                    "type": "text"
+                                                },
+                                                "type_id": {
+                                                    "type": "number"
+                                                },
+                                                "selter_id": {
+                                                    "type": "number"
+                                                },
+                                                "steril_id": {
+                                                    "type": "number"
+                                                },
+                                                "create_at": {
+                                                    "type": "number"
+                                                },
+                                                "update_at": {
+                                                    "type": "number"
+                                                },
+                                                "delete_at": {
+                                                    "type": "number"
                                                 }
                                             }
                                         },
@@ -277,20 +335,38 @@
                                                 "id": {
                                                     "type": "number"
                                                 },
-                                                "nama": {
+                                                "name": {
                                                     "type": "string"
                                                 },
-                                                "id_jenis": {
-                                                    "type": "number"
-                                                },
-                                                "id_selter": {
-                                                    "type": "number"
+                                                "age": {
+                                                    "type": "string"
                                                 },
                                                 "rescue_story": {
-                                                    "type": "text"
+                                                    "type": "string"
                                                 },
                                                 "character": {
                                                     "type": "string"
+                                                },
+                                                "picture": {
+                                                    "type": "text"
+                                                },
+                                                "type_id": {
+                                                    "type": "number"
+                                                },
+                                                "selter_id": {
+                                                    "type": "number"
+                                                },
+                                                "steril_id": {
+                                                    "type": "number"
+                                                },
+                                                "create_at": {
+                                                    "type": "number"
+                                                },
+                                                "update_at": {
+                                                    "type": "number"
+                                                },
+                                                "delete_at": {
+                                                    "type": "number"
                                                 }
                                             }
                                         },
@@ -328,6 +404,198 @@
                                             "type": "object"
                                         },
                                         "errors": {
+                                            "type": "object"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "api/dogs/{page}/{limit}/filter": {
+            "get": {
+                "description": "filter engine",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header"
+                    }
+                ],
+                "requestBody": {
+                    "description": "filter engine",
+                    "content": {
+                        "aplication/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "type": {
+                                        "type": "string"
+                                    },
+                                    "gender": {
+                                        "type": "string"
+                                    },
+                                    "character": {
+                                        "type": "string"
+                                    },
+                                    "age": {
+                                        "type": "string"
+                                    },
+                                    "group": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "response": {
+                    "200": {
+                        "description": "Succes Filter",
+                        "content": {
+                            "aplication/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "number"
+                                                    },
+                                                    "name": {
+                                                        "type": "string"
+                                                    },
+                                                    "age": {
+                                                        "type": "string"
+                                                    },
+                                                    "rescue_story": {
+                                                        "type": "string"
+                                                    },
+                                                    "character": {
+                                                        "type": "string"
+                                                    },
+                                                    "picture": {
+                                                        "type": "text"
+                                                    },
+                                                    "type_id": {
+                                                        "type": "number"
+                                                    },
+                                                    "selter_id": {
+                                                        "type": "number"
+                                                    },
+                                                    "steril_id": {
+                                                        "type": "number"
+                                                    },
+                                                    "create_at": {
+                                                        "type": "number"
+                                                    },
+                                                    "update_at": {
+                                                        "type": "number"
+                                                    },
+                                                    "delete_at": {
+                                                        "type": "number"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        },
+                                        "meta": {
+                                            "type": "object"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/dogs/{page}/{limit}/list": {
+            "post": {
+                "description": "Search Engine",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Request Search Engine",
+                    "content": {
+                        "aplication/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "query": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "search Success",
+                        "content": {
+                            "aplication/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "number"
+                                                    },
+                                                    "name": {
+                                                        "type": "string"
+                                                    },
+                                                    "age": {
+                                                        "type": "string"
+                                                    },
+                                                    "rescue_story": {
+                                                        "type": "string"
+                                                    },
+                                                    "character": {
+                                                        "type": "string"
+                                                    },
+                                                    "picture": {
+                                                        "type": "text"
+                                                    },
+                                                    "type_id": {
+                                                        "type": "number"
+                                                    },
+                                                    "selter_id": {
+                                                        "type": "number"
+                                                    },
+                                                    "steril_id": {
+                                                        "type": "number"
+                                                    },
+                                                    "create_at": {
+                                                        "type": "number"
+                                                    },
+                                                    "update_at": {
+                                                        "type": "number"
+                                                    },
+                                                    "delete_at": {
+                                                        "type": "number"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        },
+                                        "meta": {
                                             "type": "object"
                                         }
                                     }

@@ -19,10 +19,12 @@ return new class extends Migration
             $table->string('character')->nullable();
             $table->string('picture')->nullable(false);
             $table->string('gender')->nullable(false);
+            $table->boolean('reads')->nullable()->default(false);
             $table->unsignedBigInteger("type_id")->nullable(false);
             $table->unsignedBigInteger("steril_id")->nullable(false);
             $table->unsignedBigInteger("selter_id")->nullable(false);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

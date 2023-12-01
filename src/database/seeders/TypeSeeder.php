@@ -15,21 +15,24 @@ class TypeSeeder extends Seeder
     {
         $type = [
             [
-                "type" => "Buldock",
-                "kelompok" => "anjing lucu",
-                "group" => "working",
+                "type" => "indonesia street dog",
+                "size" => "Medium",
+                "activity_level" => "Moderate",
+                "groups" => "non-sporting Group",
 
             ],
             [
-                "type" => "Basmut",
-                "kelompok" =>  "Anjing Besar",
-                "group" => "herding",
+                "type" => "golden retriever",
+                "size" => "large",
+                "activity_level" => "high",
+                "groups" => "working group",
 
             ],
             [
-                "type" => "helder",
-                "kelompok" => "anjing kecil",
-                "group" => "toy",
+                "type" => "Poodie",
+                "size" => "small",
+                "activity_level" => "moderate",
+                "groups" => "toy group",
             ]
         ];
 

@@ -23,8 +23,8 @@ return new class extends Migration
             $table->unsignedBigInteger('role_id')->nullable(false);
             $table->boolean('email_verivication_status')->nullable();
             $table->date('email_verivicarition_date')->nullable();
-
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
