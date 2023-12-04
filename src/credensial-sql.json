@@ -1,0 +1,13 @@
+{
+    "type": "service_account",
+    "project_id": "capstone-aipet",
+    "private_key_id": "566c94a48ab68e554ca7fb0f046383590228739d",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDOEaUegQM1lTLf\n4Xgzw9cFx5WDWRFRdi7kSLnBB90Q17KG/urGjUqmvrIb8CcXxcxLgUp9GJi9XzjG\nEO/92ucldrh+hdfJvO/qeXBAFji38aOfgJUSrGRtUdZFz1HhdmNgPaC23LOBvgof\npddzzsnEPoOBVfX5Y5l033OdCqOgJ0k8Z37Qpqf3gOmyoTly7X07qIyzMWPvGC0i\n7bJ2snscwa2zkjSdKojAEy49CXEuikw2gQWc5o/NTFQuL6qMJbNBg9ZNSi5R0tWq\ntEqbs0BGyF1mftrHpbva+pVw7EGwyNRMul34nrXFCTlts9iz/iJ1JHmyTIXg7FO4\nxLjpQUoZAgMBAAECggEAFPMkyQ7fK2elci7bOFII7ni9ucqIkPJVrpY5MkdxIVj4\neLJ6XmC3be/VrjLyWn+ctzFoCAND5f7ECBjpOTLzzHJ/K7fCOiuH7ZvWfmFz9zlt\nA9Z/8VPO6vFGujarUaNmU364c9bItiBCqbiDyK2FhDrBxlidpvLKA2CDQbw26d1d\n10vbvBmYtwxOzAYc6FJXWjdCnuzGxpaZexVzz1+RX+86HQ661zEmXjBTD5ilSCiA\nILWhEa0jeA4OluyGGIJxMNARkwiBnRBtFRqi63eXovhQ4AnWmptUjRtIZ2S7qDyy\n3dYIV2bs+a1EIj5r/yVygf91wXDsGpARrt4qYrZwrQKBgQDyTDa5upk4GYRKu4Kn\nF5a0sJg/GY+zCyMnaT+dOOk1mGy2Adq5AT45x/CcmW/ReE350CwKc+QA+txXSuHg\na9/h1x1LIUDNH2+8LDK8acXF8uLkJPAgrVyLD4thtq42TnGeblpOAgAfJFYYMlmm\ns51Dc9hZhtwdQ1wqWifDfuP1VQKBgQDZuPDX1oSEAS5WC7Uw2jhRM1S9cO1FI7lj\nS+PcBIMwWJMEpqDTuYJChszeC58Lz8uFe+zYYENmZ1ViX0x7gKn1cjqSxpkTD9MR\nItcyzY7M9nHlGDnRNNQtnhyaTKV09f6anvP7gX9JzrYJufjGdrPvTtXZ6vWM/hzH\nXZnJ5aGBtQKBgQCCxyoekx3SDsu9vnmlkHDSdCKopDZQkClYQ1GHnckaGXxLvLJ+\nerJIY6d2Dscwy3ti475xod2lvcEiCJPkGrWLYx03iOo+DMK1UTHNSlXqIs/eDiXh\nrVCu6iP0CLL9MtfWiH+LbT79kBI8GykSdg3i82sJ32V9Efd0EJc3yIxnxQKBgQCP\ngLJd0OqvBwg/dqAKfwq3mpmz84awF4fNxut8zQybBQaB/kHqy07sAmVtxUMjSebf\nKHtHcst554oDuMR0cq2TNaMdswCZ68g2dzxYI9yHg7g2Q+130tY26wv3N6Wmna0e\nxL4Te5smTrT1XDp4tSyMAu45IACQ2bymOy9uP4hgMQKBgHaMfrPosWWGd2RPAKRL\nR9ko5f/CZkFfs+9mwnn3pZ5zTm+CNflw1tkVYELsNWWeUWpIW3/5zE2AMf8BETnP\nX5hegMnpnNp/fJa+go1jcHmOA2cPSS+Mb7kViAZ4WOJUFChwt/NQBuRqDkc/Eayc\ngyr5VLxJukgTLb9iEtswUT81\n-----END PRIVATE KEY-----\n",
+    "client_email": "access-sql-aipet@capstone-aipet.iam.gserviceaccount.com",
+    "client_id": "111415743592484368484",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/access-sql-aipet%40capstone-aipet.iam.gserviceaccount.com",
+    "universe_domain": "googleapis.com"
+}
