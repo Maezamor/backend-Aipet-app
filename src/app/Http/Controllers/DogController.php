@@ -15,6 +15,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\UploadedFile;
 use App\Http\Resources\DogResource;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use App\Http\Requests\DogUpdateRequest;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
@@ -26,6 +27,31 @@ use Illuminate\Http\Exceptions\HttpResponseException;
 class DogController extends Controller
 {
 
+    private $durasi = 10;
+
+    private function getCachedData($key, $id, $model, $errorMessage)
+    {
+        $data = Cache::get($key . $id);
+
+        if (!$data) {
+            $data = $model::find($id);
+
+            if (!$data) {
+                throw new HttpResponseException(response()->json([
+                    'errors' => [
+                        'message' => [
+                            $errorMessage
+                        ]
+                    ]
+                ])->setStatusCode(404));
+            }
+
+            // Simpan data ke dalam cache dengan durasi 10 menit
+            Cache::put($key . $id, $data, now()->addMinutes($this->durasi));
+        }
+
+        return $data;
+    }
 
     public function create(DogCreatedRequest $request): JsonResponse
     {
@@ -48,33 +74,26 @@ class DogController extends Controller
             'selter_id' => $request->selter_id,
             'steril_id' => $request->steril_id
         ]);
-
         return (new DogResource($dog))->response()->setStatusCode(201);
     }
 
     public function get(Request $request): JsonResponse
     {
-        $dog = Dog::where('id', $request->id)->first();
-        if (!$dog) {
-            throw new HttpResponseException(response()->json([
-                'errors' => [
-                    "message" => [
-                        "not found"
-                    ]
-                ]
-            ])->setStatusCode(404));
-        }
+        $start = microtime(true);
+        $dog = $this->getCachedData('dog_', $request->id, Dog::class, 'Dog not found');
+        $selter = $this->getCachedData('selter_', $dog->selter_id, Selter::class, 'Selter not found');
+        $steril = $this->getCachedData('steril_', $dog->steril_id, Sterlisation::class, 'Sterilisation not found');
+        $type = $this->getCachedData('type_', $dog->type_id, Type::class, 'Type not found');
+        $end = microtime(true);
 
-        $selter =  Selter::where('id', $dog->selter_id)->first();
-        $steril =  Sterlisation::where('id', $dog->steril_id)->first();
-        $type =  Type::where('id', $dog->type_id)->first();
-
+        $executionTime = ($end - $start) * 1000 . 'ms';
         return response()->json([
             'data' => [
-                "dog" => $dog,
-                "selter" => $selter,
-                "gender" => $steril,
-                "Type" => $type
+                'time' => $executionTime,
+                'dog' => $dog,
+                'selter' => $selter,
+                'gender' => $steril,
+                'Type' => $type
             ]
         ])->setStatusCode(200);
     }
@@ -82,7 +101,10 @@ class DogController extends Controller
     public function update(DogUpdateRequest $request): DogResource
     {
         $data =  $request->validated();
-        $dog = Dog::where('id', $request->id)->first();
+        $dog = Cache::remember('dogUpdate_' . $request->id, now()->addMinutes($this->durasi), function () use ($request) {
+            return Dog::where('id', $request->id)->first();
+        });
+
 
         if (!$dog) {
             throw new HttpResponseException(response()->json([
@@ -102,7 +124,9 @@ class DogController extends Controller
 
     public function delete(Request $request): JsonResponse
     {
-        $dog = Dog::where("id", $request->id)->first();
+        $dog = Cache::remember('dogUpdate_' . $request->id, now()->addMinutes($this->durasi), function () use ($request) {
+            return Dog::where('id', $request->id)->first();
+        });
         if (!$dog) {
             throw new HttpResponseException(response()->json([
                 'errors' => [
@@ -120,8 +144,9 @@ class DogController extends Controller
 
     public function search(Request $request)
     {
-        // melkukan validasi jadi inputan search nanti harus berupa string
-        $validate =  Validator::make($request->all(), [
+        $start = microtime(true);
+        // Melakukan validasi sehingga inputan search harus berupa string
+        $validate = Validator::make($request->all(), [
             'query' => 'string',
         ]);
 
@@ -133,18 +158,22 @@ class DogController extends Controller
 
         $query = $request->input('query');
 
-        $results =  Dog::select('dogs.*', 'types.type', 'types.size', 'types.activity_level', 'types.groups', 'selters.name as selter_name', 'selters.address as address')
-            ->join('sterlisations', 'dogs.steril_id', 'sterlisations.id')
-            ->join('types', 'dogs.type_id', 'types.id')
-            ->join('selters', 'dogs.selter_id', '=', 'selters.id')
-            ->orWhere('dogs.name', 'like', '%' . $query . '%')
-            ->orWhere('dogs.age', 'like', '%' . $query . '%')
-            ->orWhere('dogs.character', 'like', '%' . $query . '%')
-            ->orWhere('dogs.gender', 'like', '%' . $query . '%')
-            ->orWhere('selters.name', 'like', '%' . $query . '%')
-            ->orWhere('selters.address', 'like', '%' . $query . '%')
-            ->orWhere('types.groups', 'like', '%' . $query . '%')
-            ->paginate($request->limit, ['*'], 'page', $request->page);
+        // Menggunakan cache dengan kunci yang unik berdasarkan query
+        $results = Cache::remember('search_results_' . md5($query), now()->addMinutes($this->durasi), function () use ($query, $request) {
+            return Dog::select('dogs.*', 'types.type', 'types.size', 'types.activity_level', 'types.groups', 'selters.name as selter_name', 'selters.address as address')
+                ->join('sterlisations', 'dogs.steril_id', 'sterlisations.id')
+                ->join('types', 'dogs.type_id', 'types.id')
+                ->join('selters', 'dogs.selter_id', '=', 'selters.id')
+                ->orWhere('dogs.name', 'like', '%' . $query . '%')
+                ->orWhere('dogs.age', 'like', '%' . $query . '%')
+                ->orWhere('dogs.character', 'like', '%' . $query . '%')
+                ->orWhere('dogs.gender', 'like', '%' . $query . '%')
+                ->orWhere('selters.name', 'like', '%' . $query . '%')
+                ->orWhere('selters.address', 'like', '%' . $query . '%')
+                ->orWhere('types.groups', 'like', '%' . $query . '%')
+                ->paginate($request->limit, ['*'], 'page', $request->page);
+        });
+
         if (!$results) {
             throw new HttpResponseException(response()->json([
                 'errors' => [
@@ -154,9 +183,14 @@ class DogController extends Controller
                 ],
             ])->setStatusCode(404));
         }
-
+        $end = microtime(true);
+        $executionTime = ($end - $start) * 1000 . 'ms'; // Konversi ke milidetik
         return response()->json([
-            "data" => $results
+            "error" => false,
+            "message" => "success",
+            "time" => $executionTime,
+            "data" => $results,
+
         ])->setStatusCode(200);
     }
 
@@ -175,13 +209,36 @@ class DogController extends Controller
 
     public function getRescue(): JsonResponse
     {
-        // get rescue randowm for dog
+        // Mendapatkan rescue secara acak dari cache atau database
+
         $rescue = Dog::select('id', 'rescue_story')->where('reads', false)->inRandomOrder()->first();
 
-        // ipdate label for false to true
-        $checkUpdate =  $this->updateLabel($rescue);
 
+        // Jika tidak ada rescue yang ditemukan, berikan respons JSON dengan status 404
+        if (!$rescue) {
+            throw new HttpResponseException(response()->json([
+                'errors' => [
+                    'message' => [
+                        "not found"
+                    ]
+                ],
+            ])->setStatusCode(404));
+        }
+
+        // Mengupdate label dari false ke true
+        $checkUpdate = $this->updateLabel($rescue);
+
+        if (!$checkUpdate) {
+            return response()->json([
+                'error' =>  false,
+                'message' => "server not responding"
+            ])->setStatusCode(500);
+        }
+
+        // Memberikan respons JSON dengan data rescue
         return response()->json([
+            'error' => false,
+            'message' => 'success',
             'data' => $rescue
         ])->setStatusCode(200);
     }
@@ -191,36 +248,34 @@ class DogController extends Controller
     public function  filter(Request $request): JsonResponse
 
     {
-        $query =  Dog::query();
+        // Membuat instance query builder untuk model Dog
+        $query = Dog::query();
 
-        // filter lewat jenis
+        // Filter berdasarkan jenis
         if ($request->has("groups")) {
             $query->whereHas('type', function ($q) use ($request) {
                 $q->where('groups', $request->input('groups'));
             });
         }
 
+        // Filter berdasarkan sterilisasi
         if ($request->has("sterlisasi")) {
             $query->whereHas('sterlisation', function ($q) use ($request) {
-                $q->where('name', $request->input('sterlisai'));
+                $q->where('name', $request->input('sterlisasi'));
             });
         }
 
+        // Filter berdasarkan usia
         if ($request->has("age")) {
             $query->where('age', $request->input('age'));
         }
 
-        if ($request->has('group')) {
-            $query->whereHas('type', function ($q) use ($request) {
-                $q->where('group', $request->input('group'));
-            });
-        }
+        // Menggunakan cache dengan kunci yang unik berdasarkan parameter filter
+        $dogs = Cache::remember('search_dogs_' . md5(json_encode($request->all())), now()->addMinutes(10), function () use ($query, $request) {
+            return $query->paginate($request->limit, ['*'], 'page', $request->page);
+        });
 
-
-
-        $dogs =  $query->paginate($request->limit, ['*'], 'page', $request->page);
-
-
+        // Jika tidak ada anjing yang ditemukan, berikan respons JSON dengan status 404
         if (!$dogs) {
             throw new HttpResponseException(response()->json([
                 'errors' => [
@@ -231,7 +286,10 @@ class DogController extends Controller
             ])->setStatusCode(404));
         }
 
+        // Memberikan respons JSON dengan data anjing
         return response()->json([
+            'error' => false,
+            'message' => 'success',
             'data' => $dogs
         ])->setStatusCode(200);
     }

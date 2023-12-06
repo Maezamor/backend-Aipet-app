@@ -41,6 +41,6 @@ class Dog extends Model
 
     public function sterlisation()
     {
-        return $this->belongsTo(Sterlisation::class);
+        return $this->belongsTo(Sterlisation::class, 'steril_id', 'id');
     }
 }

@@ -1,4 +1,4 @@
-INSERT INTO usera (username, name, address, phone, email, password, email_verification_date) VALUES
+INSERT INTO users (username, name, address, phone, email, password, email_verification_date) VALUES
 	('user1', 'John Doe ', 'Jalan Raya Kuta, Bali, Indonesia', '6.28123E+11', 'john.doe@email.com ', 'password123', '2023-11-22'),
 	('user2', 'Jane Smith', 'Jalan Sunset Road, Bali, Indonesia', '6.28235E+11', 'jane.smith@email.com ', 'pass1234 ', '2023-11-22'),
 	('user3', 'Michael Johnson', 'Jalan Legian, Bali, Indonesia ', '6.28346E+11', 'michael.johnson@email.com', '123456', '2023-11-23'),

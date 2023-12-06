@@ -9,4 +9,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Adoption extends Model
 {
     use SoftDeletes;
+
+    protected $fillable = [
+        'dog_id',
+        'user_id'
+    ];
 }

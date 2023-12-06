@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdoptionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DogController;
@@ -49,10 +50,14 @@ Route::middleware(ApiAuthMiddleware::class)->group(function () {
     Route::get('dogs/rescue', [DogController::class, 'getRescue']);
 
     //onboarding
+    Route::post('onboarding/1/start', [OnboardingController::class, 'onboarding1Start']);
+    Route::post('onboarding/2/start', [OnboardingController::class, 'onboarding2Start']);
     Route::get('onboarding/end', [OnboardingController::class, 'onboardingEnd']);
 
 
     // Api Adoption Controller
+    Route::get('adoption/get', [AdoptionController::class, 'getAdoption']);
+    Route::get('adoption/create', [AdoptionController::class, 'checkout']);
 
 
     // Api Selter Controller
