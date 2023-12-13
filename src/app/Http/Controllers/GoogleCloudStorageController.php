@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Intervention\Image\Image;
 use League\Flysystem\Filesystem;
@@ -21,7 +22,7 @@ class GoogleCloudStorageController extends Controller
     public function __construct()
     {
         $storageClient = new StorageClient([
-            'keyFilePath' => 'C:\Bangkit Google 2023\Project Capstone\backend-Aipet-app\src\credensial.json',
+            'keyFilePath' => 'C:\My-Program Folders\Project Capstone\backend-Aipet-app\src\credensial.json',
         ]);
         $bucket = $storageClient->bucket($this->bucket);
         $adapter = new GoogleCloudStorageAdapter($bucket);
@@ -46,9 +47,11 @@ class GoogleCloudStorageController extends Controller
 
             // Read file contents
             $fileContents = $file->getRealPath();
-
+            
+            //perikasi dulu nama gambar tidak boleh ada sepasi
+            $nameValidate = $slug = Str::slug($request->name);
             // Generate a unique name for the image
-            $imageName = $folder . '/' . 'image-' . $request->name . '-' . time() . '.' . $file->getClientOriginalExtension();
+            $imageName = $folder . '/' . 'image-' . $nameValidate . '-' . time() . '.' . $file->getClientOriginalExtension();
             $stream = fopen($fileContents, 'r+');
             try {
                 $this->filesystem->writeStream($imageName, $stream);
@@ -57,11 +60,11 @@ class GoogleCloudStorageController extends Controller
                 $url = 'https://storage.googleapis.com/' . $this->bucket . '/' . $imageName;
                 return  $url;
             } catch (FilesystemException | UnableToWriteFile $e) {
-                return 'Could not upload/write the file to Google Storage. Reason: ' . $e->getMessage();
+                return 500;
             }
         }
 
-        return  'No file was provided.';
+        return  404;
     }
 
     public function renameFile(Request $request)
@@ -81,19 +84,26 @@ class GoogleCloudStorageController extends Controller
         }
     }
 
-    public function deleteFile(Request $request)
+    public function deleteFile($source)
     {
-        $source = $request->input('source');
+        $fullUrl = $source;
 
-        if (!$this->filesystem->fileExists($source)) {
-            return redirect()->back()->with('error', 'Cannot delete ' . $source . ' as it does not exist.');
+        // Bagian yang ingin dihapus
+        $removePart = 'https://storage.googleapis.com/aipet-storage/';
+        
+        // Menghapus bagian tertentu dari URL
+        $relativeUrl = str_replace($removePart, '', $fullUrl);
+
+        //memeriksan apakah filenya ada di google cloud Storage
+        if (!$this->filesystem->fileExists($relativeUrl)) {
+            return  404;
         }
 
         try {
-            $this->filesystem->delete($source);
-            return redirect()->back()->with('success', 'File (' . $source . ') was successfully deleted.');
+            $this->filesystem->delete($relativeUrl);
+            return 200;
         } catch (FilesystemException | UnableToMoveFile $e) {
-            return redirect()->back()->with('error', 'Could not delete the file: ' . $source . '. Reason: ' . $e->getMessage());
+            return  500;
         }
     }
 }

@@ -27,7 +27,7 @@ class SelterUpdateRequest extends FormRequest
             'id' => ['required'],
             'name' => ['nullable', 'string', 'max:100'],
             'address' => ['nullable', 'string'],
-            'picture' => ['nullable'],
+            'picture' => ['nullable','file','mimes:jpg,png,jpeg','max:2048'],
             'city' => ['nullable'],
             'description' => ['nullable'],
             'sosial_media_1' => ['nullable'],

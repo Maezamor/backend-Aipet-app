@@ -20,7 +20,7 @@ class AdoptionController extends Controller
 
         // Coba untuk mendapatkan data dari cache
         $result = Cache::remember($cacheKey, now()->addMinutes($this->durasi), function () use ($request) {
-            return Adoption::select("dogs.*", "selters.*", "users.name as adopter")
+            return Adoption::select("dogs.name","dogs.age","dogs.picture","dogs.gender", "adoptions.created_at", "users.name as adopter")
                 ->join("users", "adoptions.user_id", "=", "users.id")
                 ->join("dogs", "adoptions.dog_id", "=", "dogs.id")
                 ->join("selters", "dogs.selter_id", "=", "selters.id")

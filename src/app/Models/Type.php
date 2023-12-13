@@ -18,8 +18,9 @@ class Type extends Model
 
     protected $fillable = [
         'type',
-        'kelompok',
-        'group'
+        'size',
+        'activity_level',
+        'groups'
     ];
 
     public function Dog()

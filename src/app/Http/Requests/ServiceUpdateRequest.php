@@ -25,7 +25,7 @@ class ServiceUpdateRequest extends FormRequest
     {
         return [
             'id' => ['required'],
-            'picture' => ['nullable'],
+            'picture' => ['nullable','file','mimes:jpg,png,jpeg','max:2048'],
             'name' =>  ['nullable', 'max:100'],
             'sosial_media_1' => ['nullable'],
             'sosial_media_2' => ['nullable'],

@@ -115,7 +115,39 @@ class DogController extends Controller
                 ]
             ])->setStatusCode(404));
         }
-        $data = $request->validated();
+       
+        if($request->hasFile('picture')){
+            //medelet gambar yang ada di google cloud storage 
+            $storage =  new GoogleCloudStorageController();
+            $delete =  $storage->deleteFile($dog->picture);
+
+            if ($delete == 404){
+                throw new HttpResponseException(response()->json([
+                    "errors" => [
+                        "message" => [
+                            "not found"
+                        ]
+                    ]
+                ])->setStatusCode(404));
+            } else if ($delete ==  500){
+                throw new HttpResponseException(response()->json([
+                    "errors" => [
+                        "message" => [
+                            "Server Storage not responding"
+                        ]
+                    ]
+                ])->setStatusCode(500));
+            }
+
+             // melakuakn uploud kemabali image jika ada perubahan
+             $patch =  $storage->uploadFile($request, 'dog-image');
+             $data['picture'] = $patch;
+        }else {
+            //misalnya dia tidak meruba gambar selter maka diisi dengan patch gambar lama
+            $data['picture'] = $dog->picture;
+        }
+
+
         $dog->fill($data);
         $dog->save();
 
@@ -124,7 +156,7 @@ class DogController extends Controller
 
     public function delete(Request $request): JsonResponse
     {
-        $dog = Cache::remember('dogUpdate_' . $request->id, now()->addMinutes($this->durasi), function () use ($request) {
+        $dog = Cache::remember('dogDelete_' . $request->id, now()->addMinutes($this->durasi), function () use ($request) {
             return Dog::where('id', $request->id)->first();
         });
         if (!$dog) {
@@ -136,6 +168,8 @@ class DogController extends Controller
                 ]
             ])->setStatusCode(404));
         }
+        $storage =  new GoogleCloudStorageController();
+        $delete =  $storage->deleteFile($dog->picture);
         $dog->delete();
         return response()->json([
             'data' => true
@@ -245,6 +279,7 @@ class DogController extends Controller
 
 
 
+
     public function  filter(Request $request): JsonResponse
 
     {
@@ -272,7 +307,7 @@ class DogController extends Controller
 
         // Menggunakan cache dengan kunci yang unik berdasarkan parameter filter
         $dogs = Cache::remember('search_dogs_' . md5(json_encode($request->all())), now()->addMinutes(10), function () use ($query, $request) {
-            return $query->paginate($request->limit, ['*'], 'page', $request->page);
+            return $query->select('dogs.name','dogs.picture','dogs.gender','dogs.age','types.type')->join('types','dogs.type_id','=','types.id')-> paginate($request->limit, ['*'], 'page', $request->page);
         });
 
         // Jika tidak ada anjing yang ditemukan, berikan respons JSON dengan status 404

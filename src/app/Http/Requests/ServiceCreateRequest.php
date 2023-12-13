@@ -24,7 +24,7 @@ class ServiceCreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'picture' => ['nullable'],
+            'picture' => ['nullable','file','mimes:jpg,png,jpeg','max:2048'],
             'name' =>  ['required', 'max:100'],
             'sosial_media_1' => ['required'],
             'sosial_media_2' => ['required'],

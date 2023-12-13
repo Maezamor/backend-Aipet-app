@@ -25,7 +25,7 @@ class SelterCreateRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:100'],
-            'picture' => ['nullable'],
+            'picture' => ["required", "file", 'mimes:jpg,png,jpeg','max:2048'],
             'city' => ['required'],
             'address' => ['required', 'string'],
             'description' => ['nullable'],

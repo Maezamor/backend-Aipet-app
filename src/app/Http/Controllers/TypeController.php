@@ -10,9 +10,11 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class TypeController extends Controller
 {
-    public function get(int $page = 1, int $limit = 10): JsonResponse
+
+    
+    public function get(Request $request): JsonResponse
     {
-        $type = Type::paginate($limit, ["*"], "page", $page);
+        $type = Type::paginate($request->limit, ["*"], "page", $request->page);
 
         return response()->json([
             "data" => $type
@@ -22,8 +24,9 @@ class TypeController extends Controller
     {
         $validator =  Validator::make($request->all(), [
             'type' => 'required|string|max:50',
-            'kelompok' => 'required|string|max:50',
-            'group' => 'required|string|max:50'
+            'size' => 'required|string|max:50',
+            'activityLevel' => 'required|string|max:50',
+            'groups' => 'required|string|max:50'
         ]);
 
         if ($validator->fails()) {
@@ -32,8 +35,9 @@ class TypeController extends Controller
 
         $type = Type::create([
             'type' => $request->type,
-            'kelompok' => $request->kelompok,
-            'group' => $request->group
+            'size' => $request->size,
+            'activity_level' => $request->activityLevel,
+            'groups' => $request->groups
         ]);
 
         return response()->json([
@@ -41,26 +45,28 @@ class TypeController extends Controller
         ]);
     }
 
-    public function update(int $id, Request $request): JsonResponse
+    public function update( Request $request): JsonResponse
     {
         $validator =  Validator::make($request->all(), [
-            'type' => 'required|string|max:50',
-            'kelompok' => 'required|string|max:50',
-            'group' => 'required|string|max:50'
+            'type' => 'nullable|string|max:50',
+            'size' => 'nullable|string|max:50',
+            'activityLevel' => 'nullable|string|max:50',
+            'groups' => 'nullable|string|max:50'
         ]);
 
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 400);
         }
 
-        $type = Type::where('id', $id)->first();
+        $type = Type::where('id', $request->id)->first();
         if (!$type) {
             return response()->json(['errors' => ['message' => 'not found']], 404);
         }
         $type->update([
             'type' => $request->type,
-            'kelompok' => $request->kelompok,
-            'group' => $request->group
+            'size' => $request->size,
+            'activity_level' => $request->activityLevel,
+            'groups' => $request->groups
         ]);
 
         return response()->json([
@@ -68,9 +74,9 @@ class TypeController extends Controller
         ])->setStatusCode(200);
     }
 
-    public function delete(int $id)
+    public function delete(Request $request)
     {
-        $type =  Type::where('id', $id)->first();
+        $type =  Type::where('id', $request->id)->first();
         $type->delete();
 
         return response()->json([

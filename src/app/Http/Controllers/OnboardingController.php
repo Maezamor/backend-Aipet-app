@@ -3,13 +3,92 @@
 namespace App\Http\Controllers;
 
 use App\Models\Dog;
+use App\Models\Type;
 use App\Models\Onboarding;
+use App\Models\Sterlisation;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 
 class OnboardingController extends Controller
 {
+    protected $durasi = 10;
+
+
+    public function getTaskOnboardingFilter (): JsonResponse
+    {
+        $start = microtime(true);
+        $groups = Cache::remember('groupsDog_', now()->addMinutes($this->durasi), function () {
+            return Type::distinct()->pluck('groups');
+        }); 
+        
+        
+        
+        $strilisations = Cache::remember('sterilDog_', now()->addMinutes($this->durasi), function ()  {
+            return Sterlisation::all();
+        }); 
+
+        $age = Cache::remember('ageDog_', now()->addMinutes($this->durasi), function () {
+            return Dog::distinct()->pluck('age');
+        }); 
+        
+        
+    
+
+        if(!$groups && !$strilisations && !$age){
+                return response()->json([
+                    'error' => [
+                        'message' => 'not found'
+                    ]
+                ])->setStatusCode(404);
+        }
+
+        $end = microtime(true);
+        $executionTime = ($end - $start) * 1000 . 'ms'; // Konversi ke milidetik
+        return response()->json([
+            'time' => $executionTime,
+            'error' => false,
+            'message' => 'succses',
+            'data' => [
+                'groups' =>  $groups,
+                'strilisations' => $strilisations,
+                'age' =>  $age
+            ]
+        ])->setStatusCode(200);
+
+    }
+
+    public function getOnboardingData (): JsonResponse
+    {
+
+        $start = microtime(true);
+        $onbrResult = Cache::remember('onboardingDataresult_', now()->addMinutes($this->durasi), function () {
+            return  Onboarding::all();
+        }); 
+
+        if (!$onbrResult) {
+            throw new HttpResponseException(response()->json([
+                'errors' => [
+                    'message' => [
+                        "not found"
+                    ]
+                ],
+            ])->setStatusCode(404));
+        }
+        
+        $end = microtime(true);
+        $executionTime = ($end - $start) * 1000 . 'ms'; // Konversi ke milidetik
+        return response()->json([
+            'time' => $executionTime,
+            'error' => false,
+            'message' => 'Success',
+            'data' => $onbrResult
+
+        ])->setStatusCode(200);
+        
+        
+    }
 
     public function onboarding1Start(Request $request): JsonResponse
     {
@@ -40,6 +119,7 @@ class OnboardingController extends Controller
     }
 
     public function onboarding2Start(Request $request): JsonResponse
+    
     {
 
         $user = Auth::user();

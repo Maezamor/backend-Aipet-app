@@ -11,19 +11,9 @@ use Illuminate\Http\JsonResponse;
 
 class SterillizationController extends Controller
 {
-    public function get(int $page, int $limit): JsonResponse
+    public function get(Request $request): JsonResponse
     {
-        $result = Sterlisation::paginate($page, ['*'], 'page', $limit);
-
-        // if ($result->isEmpty()) {
-        //     throw new HttpResponseException(response([
-        //         'errors' => [
-        //             'message' => [
-        //                 'you not have data'
-        //             ]
-        //         ]
-        //     ])->setStatusCode(404));
-        // }
+        $result = Sterlisation::paginate($request->limit, ['*'], 'page', $request->page);
 
         return response()->json([
             'data' => $result
@@ -44,21 +34,12 @@ class SterillizationController extends Controller
         ])->setStatusCode(201);
     }
 
-    public function update(int $id, SterilizationUpdate $request): JsonResponse
+    public function update( SterilizationUpdate $request): JsonResponse
     {
 
-        if (!$id) {
-            throw new HttpResponseException(response([
-                'errors' => [
-                    'message' => [
-                        'id is required'
-                    ]
-                ]
-            ])->setStatusCode(400));
-        }
         $data = $request->validated();
 
-        $steril = Sterlisation::find($id);
+        $steril = Sterlisation::find($request->id);
 
         if (!$steril) {
             throw new HttpResponseException(response([
@@ -79,19 +60,10 @@ class SterillizationController extends Controller
         ])->setStatusCode(200);
     }
 
-    public function delete(int $id): JsonResponse
+    public function delete(Request $request): JsonResponse
     {
-        if (!$id) {
-            throw new HttpResponseException(response([
-                'errors' => [
-                    'message' => [
-                        'id is required'
-                    ]
-                ]
-            ])->setStatusCode(400));
-        }
 
-        $steril =  Sterlisation::find($id);
+        $steril =  Sterlisation::find($request->id);
 
         if (!$steril) {
             throw new HttpResponseException(response([

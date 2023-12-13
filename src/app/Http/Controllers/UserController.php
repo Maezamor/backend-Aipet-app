@@ -13,6 +13,7 @@ use App\Http\Requests\UserLoginRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Http\Requests\UserRegisterRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use App\Http\Controllers\GoogleCloudStorageController;
 
 class UserController extends Controller
 {
@@ -76,15 +77,7 @@ class UserController extends Controller
     public function update(UserUpdateRequest $request): UserResource
     {
         //get data from request
-        if ($request->header('Content-Type') !== 'application/json') {
-            throw new HttpResponseException(response([
-                'errors' => [
-                    'message' => [
-                        'Invalid content Type'
-                    ]
-                ]
-            ])->setStatusCode(400));
-        }
+        
         $data = $request->validated();
 
         //mengambil informasi user saat ini
@@ -108,6 +101,59 @@ class UserController extends Controller
         if (isset($data['password'])) {
             $user->password = Hash::make($data['password']);
         }
+
+        if (isset($data['picture'])) {
+
+            if($user->picture == null){
+                $storage  =  new GoogleCloudStorageController();
+                $patch =  $storage->uploadFile($request,'imageUser');
+
+                if($patch ==  400){
+                    return response()->json([
+                        'error' => true,
+                        'message' => 'your have not picture'
+                    ])->setStatusCode(400);
+                } else if ($patch ==  500) {
+                    return response()->json([
+                        'error' => true,
+                        'message' => 'serve save file is not responding'
+                    ])->setStatusCode(500);
+                }
+
+                $user->picture = $patch;
+            }else{
+
+                $delete =  $storage->deleteFile($service->picture);
+
+                if ($delete == 404){
+                    throw new HttpResponseException(response()->json([
+                        "errors" => [
+                            "message" => [
+                                "not found"
+                            ]
+                        ]
+                    ])->setStatusCode(404));
+                } else if ($delete ==  500){
+                    throw new HttpResponseException(response()->json([
+                        "errors" => [
+                            "message" => [
+                                "Server Storage not responding"
+                            ]
+                        ]
+                    ])->setStatusCode(500));
+                }
+    
+                 // melakuakn uploud kemabali image jika ada perubahan
+                 $patch =  $storage->uploadFile($request, 'imageUser');
+                 $user->picture = $patch;
+            }
+
+            
+
+
+           
+        }
+        
 
         $user->save();
         return new UserResource($user);
