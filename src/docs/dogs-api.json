@@ -1,0 +1,610 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "Dogy API",
+        "description": "Api akses data dogy",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8001"
+        }
+    ],
+    "paths": {
+        "/api/dogy": {
+            "post": {
+                "description": "Create dogy documentation",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Create value Request Dogy",
+                    "content": {
+                        "aplication/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "age": {
+                                        "type": "string"
+                                    },
+                                    "rescue_story": {
+                                        "type": "string"
+                                    },
+                                    "character": {
+                                        "type": "string"
+                                    },
+                                    "picture": {
+                                        "type": "text"
+                                    },
+                                    "type_id": {
+                                        "type": "number"
+                                    },
+                                    "selter_id": {
+                                        "type": "number"
+                                    },
+                                    "steril_id": {
+                                        "type": "number"
+                                    },
+                                    "character": {
+                                        "type": "string"
+                                    },
+                                    "create_at": {
+                                        "type": "number"
+                                    },
+                                    "update_at": {
+                                        "type": "number"
+                                    },
+                                    "delete_at": {
+                                        "type": "number"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success Create Dogy Documentation",
+                        "content": {
+                            "aplication/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "number"
+                                                },
+                                                "name": {
+                                                    "type": "string"
+                                                },
+                                                "age": {
+                                                    "type": "string"
+                                                },
+                                                "rescue_story": {
+                                                    "type": "string"
+                                                },
+                                                "character": {
+                                                    "type": "string"
+                                                },
+                                                "picture": {
+                                                    "type": "text"
+                                                },
+                                                "type_id": {
+                                                    "type": "number"
+                                                },
+                                                "selter_id": {
+                                                    "type": "number"
+                                                },
+                                                "steril_id": {
+                                                    "type": "number"
+                                                },
+                                                "create_at": {
+                                                    "type": "number"
+                                                },
+                                                "update_at": {
+                                                    "type": "number"
+                                                },
+                                                "delete_at": {
+                                                    "type": "number"
+                                                }
+                                            }
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "description": "Search Dogy",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header"
+                    }
+                ],
+                "response": {
+                    "200": {
+                        "description": "Success search",
+                        "content": {
+                            "aplication/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "number"
+                                                    },
+                                                    "name": {
+                                                        "type": "string"
+                                                    },
+                                                    "age": {
+                                                        "type": "string"
+                                                    },
+                                                    "rescue_story": {
+                                                        "type": "string"
+                                                    },
+                                                    "character": {
+                                                        "type": "string"
+                                                    },
+                                                    "picture": {
+                                                        "type": "text"
+                                                    },
+                                                    "type_id": {
+                                                        "type": "number"
+                                                    },
+                                                    "selter_id": {
+                                                        "type": "number"
+                                                    },
+                                                    "steril_id": {
+                                                        "type": "number"
+                                                    },
+                                                    "create_at": {
+                                                        "type": "number"
+                                                    },
+                                                    "update_at": {
+                                                        "type": "number"
+                                                    },
+                                                    "delete_at": {
+                                                        "type": "number"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        },
+                                        "meta": {
+                                            "type": "object"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/dogy/{id}": {
+            "put": {
+                "description": "Update Dogy",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "name": "id",
+                        "in": "header"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Update Dogy Request",
+                    "content": {
+                        "aplication/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "age": {
+                                        "type": "string"
+                                    },
+                                    "rescue_story": {
+                                        "type": "string"
+                                    },
+                                    "character": {
+                                        "type": "string"
+                                    },
+                                    "picture": {
+                                        "type": "text"
+                                    },
+                                    "type_id": {
+                                        "type": "number"
+                                    },
+                                    "selter_id": {
+                                        "type": "number"
+                                    },
+                                    "steril_id": {
+                                        "type": "number"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Update Success Dogy",
+                        "content": {
+                            "aplication/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "number"
+                                                },
+                                                "name": {
+                                                    "type": "string"
+                                                },
+                                                "age": {
+                                                    "type": "string"
+                                                },
+                                                "rescue_story": {
+                                                    "type": "string"
+                                                },
+                                                "character": {
+                                                    "type": "string"
+                                                },
+                                                "picture": {
+                                                    "type": "text"
+                                                },
+                                                "type_id": {
+                                                    "type": "number"
+                                                },
+                                                "selter_id": {
+                                                    "type": "number"
+                                                },
+                                                "steril_id": {
+                                                    "type": "number"
+                                                },
+                                                "create_at": {
+                                                    "type": "number"
+                                                },
+                                                "update_at": {
+                                                    "type": "number"
+                                                },
+                                                "delete_at": {
+                                                    "type": "number"
+                                                }
+                                            }
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "description": "Get detail anjing",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path"
+                    }
+                ],
+                "response": {
+                    "200": {
+                        "description": "success get detail anjing",
+                        "content": {
+                            "aplication/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "number"
+                                                },
+                                                "name": {
+                                                    "type": "string"
+                                                },
+                                                "age": {
+                                                    "type": "string"
+                                                },
+                                                "rescue_story": {
+                                                    "type": "string"
+                                                },
+                                                "character": {
+                                                    "type": "string"
+                                                },
+                                                "picture": {
+                                                    "type": "text"
+                                                },
+                                                "type_id": {
+                                                    "type": "number"
+                                                },
+                                                "selter_id": {
+                                                    "type": "number"
+                                                },
+                                                "steril_id": {
+                                                    "type": "number"
+                                                },
+                                                "create_at": {
+                                                    "type": "number"
+                                                },
+                                                "update_at": {
+                                                    "type": "number"
+                                                },
+                                                "delete_at": {
+                                                    "type": "number"
+                                                }
+                                            }
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Remove dogy",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path"
+                    }
+                ],
+                "response": {
+                    "200": {
+                        "description": "Success delete Dogy",
+                        "content": {
+                            "aplication/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object"
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "api/dogs/{page}/{limit}/filter": {
+            "get": {
+                "description": "filter engine",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header"
+                    }
+                ],
+                "requestBody": {
+                    "description": "filter engine",
+                    "content": {
+                        "aplication/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "type": {
+                                        "type": "string"
+                                    },
+                                    "gender": {
+                                        "type": "string"
+                                    },
+                                    "character": {
+                                        "type": "string"
+                                    },
+                                    "age": {
+                                        "type": "string"
+                                    },
+                                    "group": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "response": {
+                    "200": {
+                        "description": "Succes Filter",
+                        "content": {
+                            "aplication/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "number"
+                                                    },
+                                                    "name": {
+                                                        "type": "string"
+                                                    },
+                                                    "age": {
+                                                        "type": "string"
+                                                    },
+                                                    "rescue_story": {
+                                                        "type": "string"
+                                                    },
+                                                    "character": {
+                                                        "type": "string"
+                                                    },
+                                                    "picture": {
+                                                        "type": "text"
+                                                    },
+                                                    "type_id": {
+                                                        "type": "number"
+                                                    },
+                                                    "selter_id": {
+                                                        "type": "number"
+                                                    },
+                                                    "steril_id": {
+                                                        "type": "number"
+                                                    },
+                                                    "create_at": {
+                                                        "type": "number"
+                                                    },
+                                                    "update_at": {
+                                                        "type": "number"
+                                                    },
+                                                    "delete_at": {
+                                                        "type": "number"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        },
+                                        "meta": {
+                                            "type": "object"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/dogs/{page}/{limit}/list": {
+            "post": {
+                "description": "Search Engine",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Request Search Engine",
+                    "content": {
+                        "aplication/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "query": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "search Success",
+                        "content": {
+                            "aplication/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "number"
+                                                    },
+                                                    "name": {
+                                                        "type": "string"
+                                                    },
+                                                    "age": {
+                                                        "type": "string"
+                                                    },
+                                                    "rescue_story": {
+                                                        "type": "string"
+                                                    },
+                                                    "character": {
+                                                        "type": "string"
+                                                    },
+                                                    "picture": {
+                                                        "type": "text"
+                                                    },
+                                                    "type_id": {
+                                                        "type": "number"
+                                                    },
+                                                    "selter_id": {
+                                                        "type": "number"
+                                                    },
+                                                    "steril_id": {
+                                                        "type": "number"
+                                                    },
+                                                    "create_at": {
+                                                        "type": "number"
+                                                    },
+                                                    "update_at": {
+                                                        "type": "number"
+                                                    },
+                                                    "delete_at": {
+                                                        "type": "number"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        },
+                                        "meta": {
+                                            "type": "object"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

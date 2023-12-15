@@ -1,0 +1,357 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "User Api Aipet",
+        "description": "Detail information for User Api Aipet x Matchmaking",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8001"
+        }
+    ],
+    "paths": {
+        "/api/users": {
+            "post": {
+                "description": "Register New User Aipet",
+                "requestBody": {
+                    "content": {
+                        "aplication/json": {
+                            "examples": {
+                                "fieren": {
+                                    "description": "Register user fieren",
+                                    "value": {
+                                        "username": "fieren",
+                                        "password": "penyihir",
+                                        "name": "fieren si penyihir",
+                                        "alamat": "surabaya",
+                                        "phone": "123456",
+                                        "email": "fieren@gmail.com"
+                                    }
+                                }
+                            },
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "username",
+                                    "name",
+                                    "address",
+                                    "nomor",
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "username": {
+                                        "type": "string"
+                                    },
+                                    "nama": {
+                                        "type": "string"
+                                    },
+                                    "alamat": {
+                                        "type": "string"
+                                    },
+                                    "phone": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "Validation error",
+                        "content": {
+                            "aplication/json": {
+                                "examples": {
+                                    "validationerror": {
+                                        "description": "Validation Unfalid",
+                                        "value": {
+                                            "errors": {
+                                                "username": [
+                                                    "username is required"
+                                                ],
+                                                "name": [
+                                                    "name is required"
+                                                ],
+                                                "alamat": [
+                                                    "address is required"
+                                                ],
+                                                "phone": [
+                                                    "phone is required"
+                                                ],
+                                                "email": [
+                                                    "email is required"
+                                                ]
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "success create user",
+                        "content": {
+                            "aplication/json": {
+                                "examples": {
+                                    "success": {
+                                        "description": "success register user",
+                                        "value": {
+                                            "data": {
+                                                "id": 1,
+                                                "name": "fren si penyihir",
+                                                "username": "fren",
+                                                "alamat": "dicago",
+                                                "phone": "123456",
+                                                "email": "fren@gmail.com"
+                                            }
+                                        }
+                                    }
+                                },
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "number"
+                                                },
+                                                "username": {
+                                                    "type": "string"
+                                                },
+                                                "name": {
+                                                    "type": "string"
+                                                },
+                                                "alamat": {
+                                                    "type": "string"
+                                                },
+                                                "nomor": {
+                                                    "type": "string"
+                                                },
+                                                "email": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/users/login": {
+            "post": {
+                "description": "login user",
+                "requestBody": {
+                    "content": {
+                        "aplication/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success login",
+                        "content": {
+                            "aplication/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "number"
+                                                },
+                                                "username": {
+                                                    "type": "string"
+                                                },
+                                                "name": {
+                                                    "type": "string"
+                                                },
+                                                "token": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/users/current": {
+            "get": {
+                "description": "Get Current User",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Susccess get Current User",
+                        "content": {
+                            "aplication/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "number"
+                                                },
+                                                "username": {
+                                                    "type": "string"
+                                                },
+                                                "name": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "description": "Update current user",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Update current user",
+                    "content": {
+                        "aplication/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "tye": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "alamat": {
+                                        "type": "string"
+                                    },
+                                    "username": {
+                                        "type": "string"
+                                    },
+                                    "phone": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success Update user",
+                        "content": {
+                            "aplication/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "data": {
+                                                    "id": {
+                                                        "type": "number"
+                                                    },
+                                                    "username": {
+                                                        "type": "string"
+                                                    },
+                                                    "name": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/user/logout": {
+            "delete": {
+                "description": "Logout Current User",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success logout user",
+                        "content": {
+                            "aplication/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "boolean"
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

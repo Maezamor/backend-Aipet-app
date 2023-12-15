@@ -1,0 +1,290 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "Selter Api",
+        "description": "Api akses data selter",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8001"
+        }
+    ],
+    "paths": {
+        "/selter/{page}/{limit}/list": {
+            "get": {
+                "description": "Api akses data selter",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "name": "page",
+                        "in": "header"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "header"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success Search",
+                        "content": {
+                            "aplication/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "number"
+                                                    },
+                                                    "name": {
+                                                        "type": "string"
+                                                    },
+                                                    "picture": {
+                                                        "type": "string"
+                                                    },
+                                                    "address": {
+                                                        "type": "string"
+                                                    },
+                                                    "description": {
+                                                        "type": "string"
+                                                    },
+                                                    "sosial-media-1": {
+                                                        "type": "string"
+                                                    },
+                                                    "sosial-media-2": {
+                                                        "type": "string"
+                                                    },
+                                                    "phone": {
+                                                        "type": "string"
+                                                    },
+                                                    "city": {
+                                                        "type": "string"
+                                                    },
+                                                    "lon": {
+                                                        "type": "number"
+                                                    },
+                                                    "let": {
+                                                        "type": "number"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/selter/{id}": {
+            "get": {
+                "description": "Api get Detail Selter",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "name": "id",
+                        "in": "header"
+                    }
+                ],
+                "response": {
+                    "200": {
+                        "description": "Get detail selter",
+                        "content": {
+                            "aplication/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "number"
+                                                    },
+                                                    "picture": {
+                                                        "type": "string"
+                                                    },
+                                                    "address": {
+                                                        "type": "string"
+                                                    },
+                                                    "description": {
+                                                        "type": "string"
+                                                    },
+                                                    "sosial-media-1": {
+                                                        "type": "string"
+                                                    },
+                                                    "sosial-media-2": {
+                                                        "type": "string"
+                                                    },
+                                                    "phone": {
+                                                        "type": "string"
+                                                    },
+                                                    "city": {
+                                                        "type": "string"
+                                                    },
+                                                    "lon": {
+                                                        "type": "number"
+                                                    },
+                                                    "let": {
+                                                        "type": "number"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Udpdate Selter",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header"
+                    }
+                ],
+                "resquestBody": {
+                    "description": "Update Request Selter",
+                    "content": {
+                        "aplication/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "picture": {
+                                        "type": "string"
+                                    },
+                                    "address": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "sosial-media-1": {
+                                        "type": "string"
+                                    },
+                                    "sosial-media-2": {
+                                        "type": "string"
+                                    },
+                                    "phone": {
+                                        "type": "string"
+                                    },
+                                    "city": {
+                                        "type": "string"
+                                    },
+                                    "lon": {
+                                        "type": "number"
+                                    },
+                                    "let": {
+                                        "type": "number"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Update Success",
+                        "content": {
+                            "aplication/json": {
+                                "schema": {
+                                    "type": {
+                                        "properties": {
+                                            "data": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "number"
+                                                    },
+                                                    "picture": {
+                                                        "type": "string"
+                                                    },
+                                                    "address": {
+                                                        "type": "string"
+                                                    },
+                                                    "description": {
+                                                        "type": "string"
+                                                    },
+                                                    "sosial-media-1": {
+                                                        "type": "string"
+                                                    },
+                                                    "sosial-media-2": {
+                                                        "type": "string"
+                                                    },
+                                                    "phone": {
+                                                        "type": "string"
+                                                    },
+                                                    "city": {
+                                                        "type": "string"
+                                                    },
+                                                    "lon": {
+                                                        "type": "number"
+                                                    },
+                                                    "let": {
+                                                        "type": "number"
+                                                    }
+                                                }
+                                            },
+                                            "errors": {
+                                                "type": "object"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete Selter",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "name": "id",
+                        "in": "header"
+                    }
+                ],
+                "response": {
+                    "200": {
+                        "description": "Success Delete",
+                        "content": {
+                            "aplication/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
