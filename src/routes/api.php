@@ -1,14 +1,16 @@
 <?php
 
-use App\Http\Controllers\AdoptionController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DogController;
+use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\TypeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SelterController;
 use App\Http\Middleware\ApiAuthMiddleware;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\AdoptionController;
 use App\Http\Controllers\OnboardingController;
 use App\Http\Controllers\SterillizationController;
 use App\Http\Controllers\PersonalityQuestionController;
@@ -30,6 +32,11 @@ use App\Http\Controllers\PersonalityQuestionController;
 
 Route::post('/users', [UserController::class, 'register']);
 Route::post('/users/login', [UserController::class, 'login']);
+Route::middleware('api-token')->group(function(){
+    Route::get('/onbr', [UserController::class, 'getToken']);
+});
+Route::get('onboarding/end', [OnboardingController::class, 'Recomendations']);
+
 
 // dalam membungkases fitur yang lebih crusial,
 Route::middleware(ApiAuthMiddleware::class)->group(function () {
@@ -53,7 +60,6 @@ Route::middleware(ApiAuthMiddleware::class)->group(function () {
     Route::get('onboarding/filter',[OnboardingController::class, 'getTaskOnboardingFilter']);
     Route::post('onboarding/1/start', [OnboardingController::class, 'onboarding1Start']);
     Route::post('onboarding/2/start', [OnboardingController::class, 'onboarding2Start']);
-    Route::get('onboarding/end', [OnboardingController::class, 'onboardingEnd']);
     Route::get('onboarding/result', [OnboardingController::class, 'getOnboardingData']);
 
 

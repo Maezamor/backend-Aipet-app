@@ -23,7 +23,8 @@ class UserResource extends JsonResource
             'phone' => $this->phone,
             'email' => $this->email,
             'picture' => $this->picture,
-            //if there token 
+            //if there 
+            'status_onbr' =>  $this->whenNotNull($this->status_onbr),
             'token' => $this->whenNotNull($this->token)
         ];
     }

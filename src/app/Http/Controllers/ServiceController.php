@@ -13,9 +13,21 @@ use Illuminate\Http\Exceptions\HttpResponseException;
 class ServiceController extends Controller
 {
     protected $durasi =  10;
+    private $timeThershold;
+    private $day = 1;
     public function get(Request $request): JsonResponse
     {
         $start = microtime(true);
+        $this->timeThreshold =  now()->subDay($this->day);
+
+         //lakukan pengechekan data apakah ada data baru
+         $newOrUpdateData = Service::where('updated_at','>', $this->timeThreshold)->get();
+         $deleteData = Service::where('deleted_at','>',$this->timeThreshold)->get();
+
+         if ($newOrUpdateData->isNotEmpty() || $deleteData->isNotEmpty()) {
+            Cache::forget('serviceList_ '. $request->page);
+        }
+
         $service = Cache::remember('serviceList_ '. $request->page, now()->addMinutes($this->durasi), function () use ($request){
             return Service::paginate($request->limit, ['*'], 'page', $request->page);
        });

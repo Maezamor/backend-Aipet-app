@@ -33,7 +33,9 @@ class ApiAuthMiddleware
             $authenticate = false;
         }else{
             // next login
+           
             Auth::login($user);
+
         }
 
         //checking valid or not

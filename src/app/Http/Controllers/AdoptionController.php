@@ -13,9 +13,23 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class AdoptionController extends Controller
 {
     protected $durasi = 10;
+    private  $timeThreshold ;
+    private $day = 1;
+
     public function getAdoption(Request $request)
     {
         $start =  microtime(true);
+
+        $this->timeThreshold = now()->subDay($this->day);
+        
+
+        $newOrUpdateData = Adoption::where('updated_at','>', $this->timeThreshold)->get();
+        $deleteData = Adoption::where('deleted_at','>', $this->timeThreshold)->get();
+
+        if ($newOrUpdateData->isNotEmpty() || $deleteData->isNotEmpty()) {
+            Cache::forget('adoption_user_' . $request->user_id);
+        }
+        
         $cacheKey = 'adoption_user_' . $request->user_id;
 
         // Coba untuk mendapatkan data dari cache
@@ -25,6 +39,7 @@ class AdoptionController extends Controller
                 ->join("dogs", "adoptions.dog_id", "=", "dogs.id")
                 ->join("selters", "dogs.selter_id", "=", "selters.id")
                 ->where("adoptions.user_id", $request->user_id)
+                ->orderBy('adoptions.dog_id')
                 ->paginate($request->limit, ['*'], 'page', $request->page);
         });
 

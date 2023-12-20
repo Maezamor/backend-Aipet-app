@@ -17,10 +17,21 @@ class SelterController extends Controller
     //penetuan durasi cache
 
     protected $durasi = 10;
+    private  $timeThreshold ;
+    private $day = 1;
+
 
     public function getCoordinat (): JsonResponse
     {
         $start = microtime(true);
+        $this->timeThreshold =  now()->subDay($this->day);
+
+        $newOrUpdateData = Selter::where('updated_at','>', $this->timeThreshold)->get();
+        $deleteData = Selter::where('deleted_at','>',$this->timeThreshold)->get();
+
+        if ($newOrUpdateData->isNotEmpty() || $deleteData->isNotEmpty()) {
+            Cache::forget('selterCoordinat_');
+        }
 
         $CoordinatSelter = Cache::remember('selterCoordinat_', now()->addMinutes($this->durasi), function (){
             return Selter::select('id','name','lon','let')->get();
@@ -51,6 +62,15 @@ class SelterController extends Controller
     public function get(Request $request): JsonResponse
     {
         $start = microtime(true);
+        $this->timeThreshold =  now()->subDay($this->day);
+
+        $newOrUpdateData = Selter::where('updated_at','>',$this->timeThreshold)->get();
+        $deleteData = Selter::where('deleted_at','>',$this->timeThreshold)->get();
+
+        if ($newOrUpdateData->isNotEmpty() || $deleteData->isNotEmpty()) {
+            Cache::forget('selterList_ '. $request->page);
+        }
+
         $selter =  Cache::remember('selterList_ '. $request->page, now()->addMinutes($this->durasi), function () use ($request){
              return Selter::paginate($request->limit, ['*'], 'page', $request->page);
         });

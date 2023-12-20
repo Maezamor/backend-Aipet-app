@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Curl\Curl;
 use App\Models\Dog;
 use App\Models\Type;
 use App\Models\Onboarding;
@@ -9,25 +10,51 @@ use App\Models\Sterlisation;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cache;
 
 class OnboardingController extends Controller
 {
     protected $durasi = 10;
+    private  $timeThreshold ;
+    private $day = 1;
 
 
     public function getTaskOnboardingFilter (): JsonResponse
     {
+      
         $start = microtime(true);
+        $this->timeThreshold =  now()->subDay($this->day);
+
+        $newOrUpdateData = Type::where('updated_at','>', $this->timeThreshold)->get();
+        $deleteData = Type::where('deleted_at','>',$this->timeThreshold)->get();
+
+        if ($newOrUpdateData->isNotEmpty() || $deleteData->isNotEmpty()) {
+            Cache::forget('groupsDog_');
+        }  
+
+        
         $groups = Cache::remember('groupsDog_', now()->addMinutes($this->durasi), function () {
             return Type::distinct()->pluck('groups');
         }); 
         
+        $newOrUpdateData = Sterlisation::where('updated_at','>', $this->timeThreshold)->get();
+        $deleteData = Sterlisation::where('deleted_at','>',$this->timeThreshold)->get();
         
-        
+        if ($newOrUpdateData->isNotEmpty() || $deleteData->isNotEmpty()) {
+            Cache::forget('sterilDog_');
+        }  
+
         $strilisations = Cache::remember('sterilDog_', now()->addMinutes($this->durasi), function ()  {
             return Sterlisation::all();
         }); 
+
+        $newOrUpdateData = Dog::where('updated_at','>', $this->timeThreshold)->get();
+        $deleteData = Dog::where('deleted_at','>',$this->timeThreshold)->get();
+
+        if ($newOrUpdateData->isNotEmpty() || $deleteData->isNotEmpty()) {
+            Cache::forget('ageDog_');
+        } 
 
         $age = Cache::remember('ageDog_', now()->addMinutes($this->durasi), function () {
             return Dog::distinct()->pluck('age');
@@ -63,8 +90,20 @@ class OnboardingController extends Controller
     {
 
         $start = microtime(true);
-        $onbrResult = Cache::remember('onboardingDataresult_', now()->addMinutes($this->durasi), function () {
-            return  Onboarding::all();
+        $this->timeThreshold =  now()->subDay($this->day);
+
+        $newOrUpdateData = Onboarding::where('updated_at','>', $this->timeThreshold)->get();
+      
+
+        if ($newOrUpdateData->isNotEmpty()) {
+            Cache::forget('onboardingDataresult_');
+        }  
+
+        //mengambil data auth siapa yang login        
+        $user = Auth::user();
+        
+        $onbrResult = Cache::remember('onboardingDataresult_', now()->addMinutes($this->durasi), function () use ($user) {
+            return Onboarding::where('user_id',$user->id)->get();
         }); 
 
         if (!$onbrResult) {
@@ -151,13 +190,21 @@ class OnboardingController extends Controller
     }
 
 
-    public function onboardingEnd()
+    public function Recomendations()
     {
+        // $curl = new Curl();
+        // $curl->get('http://192.168.100.8:5000');
+        // dd($curl);
+        // // Mendapatkan respons dalam bentuk array
+        // $dataArray =  $curl->response;
+        // dd($dataArray);
         //change column reads to false
+
+        $dog = Dog::inRandomOrder()->take(3)->get();
         Dog::query()->update(['reads' => false]);
 
         return response()->json([
-            'data' => 'true'
+            'data' => $dog
         ])->setStatusCode(200);
     }
 }

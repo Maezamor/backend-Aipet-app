@@ -8,6 +8,7 @@ use App\Models\Type;
 use App\Models\Gender;
 use App\Models\Selter;
 use UnableToWriteFile;
+use App\Models\Adoption;
 use Illuminate\Support\Str;
 use App\Models\Sterlisation;
 use Illuminate\Http\Request;
@@ -28,6 +29,8 @@ class DogController extends Controller
 {
 
     private $durasi = 10;
+    private  $timeThreshold ;
+    private $day = 1;
 
     private function getCachedData($key, $id, $model, $errorMessage)
     {
@@ -156,9 +159,7 @@ class DogController extends Controller
 
     public function delete(Request $request): JsonResponse
     {
-        $dog = Cache::remember('dogDelete_' . $request->id, now()->addMinutes($this->durasi), function () use ($request) {
-            return Dog::where('id', $request->id)->first();
-        });
+        $dog = Dog::where('id', $request->id)->first();
         if (!$dog) {
             throw new HttpResponseException(response()->json([
                 'errors' => [
@@ -178,7 +179,7 @@ class DogController extends Controller
 
     public function search(Request $request)
     {
-        $start = microtime(true);
+        $this->timeThreshold =  now()->subDay($this->day);
         // Melakukan validasi sehingga inputan search harus berupa string
         $validate = Validator::make($request->all(), [
             'query' => 'string',
@@ -191,6 +192,14 @@ class DogController extends Controller
         }
 
         $query = $request->input('query');
+
+        //lakukan pengechekan data apakah ada data baru
+        $newOrUpdateData = Dog::where('updated_at','>', $this->timeThreshold)->get();
+        $deleteData = Dog::where('deleted_at','>',$this->timeThreshold)->get();
+
+        if ($newOrUpdateData->isNotEmpty() || $deleteData->isNotEmpty()) {
+            Cache::forget('search_results_' .  md5($query));
+        }
 
         // Menggunakan cache dengan kunci yang unik berdasarkan query
         $results = Cache::remember('search_results_' . md5($query), now()->addMinutes($this->durasi), function () use ($query, $request) {
@@ -282,7 +291,10 @@ class DogController extends Controller
 
     public function  filter(Request $request): JsonResponse
 
-    {
+    { 
+        //inisiasi time Threshold untuk mendeteksi adanya perubahan dalam
+        $this->timeThreshold =  now()->subDay($this->day);
+    
         // Membuat instance query builder untuk model Dog
         $query = Dog::query();
 
@@ -305,9 +317,25 @@ class DogController extends Controller
             $query->where('age', $request->input('age'));
         }
 
+        //lakukan pengechekan data apakah ada data baru
+        $newOrUpdateData = Dog::where('updated_at','>', $this->timeThreshold)->get();
+        $deleteData = Dog::where('deleted_at','>',$this->timeThreshold)->get();
+        $newOrUpdateDataAdop = Adoption::where('updated_at','>', $this->timeThreshold)->get();
+        $deleteDataAdop = Adoption::where('deleted_at','>',$this->timeThreshold)->get();
+
+        //jika ada perubahan maka dicheck jika ada perubahan maka otomatis mengabil data yang baru
+        if ($newOrUpdateData->isNotEmpty() || $deleteData->isNotEmpty() || $newOrUpdateDataAdop->isNotEmpty() || $deleteDataAdop->isNotEmpty()) {
+            Cache::forget('search_dogs_' . md5(json_encode($request->all())));
+        }
+
         // Menggunakan cache dengan kunci yang unik berdasarkan parameter filter
         $dogs = Cache::remember('search_dogs_' . md5(json_encode($request->all())), now()->addMinutes(10), function () use ($query, $request) {
-            return $query->select('dogs.name','dogs.picture','dogs.gender','dogs.age','types.type')->join('types','dogs.type_id','=','types.id')-> paginate($request->limit, ['*'], 'page', $request->page);
+            return $query->select('dogs.id','dogs.name','dogs.picture','dogs.gender','dogs.age','types.type')
+            ->join('types','dogs.type_id','=','types.id')
+            ->leftJoin('adoptions','adoptions.dog_id','=','dogs.id')
+            ->whereNull('adoptions.dog_id')
+            ->orderBy('dogs.id')
+            ->paginate($request->limit, ['*'], 'page', $request->page);
         });
 
         // Jika tidak ada anjing yang ditemukan, berikan respons JSON dengan status 404

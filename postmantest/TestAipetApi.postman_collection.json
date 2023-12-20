@@ -22,14 +22,29 @@
 							}
 						],
 						"url": {
-							"raw": "{{url_local}}/api/admin/type",
+							"raw": "{{url_local}}/api/admin/type/list?page=2&&limit=10",
 							"host": [
 								"{{url_local}}"
 							],
 							"path": [
 								"api",
 								"admin",
-								"type"
+								"type",
+								"list"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2"
+								},
+								{
+									"key": null,
+									"value": null
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
 							]
 						}
 					},
@@ -55,13 +70,18 @@
 									"type": "text"
 								},
 								{
-									"key": "kelompok",
-									"value": "{{kelompok}}",
+									"key": "size",
+									"value": "large",
 									"type": "text"
 								},
 								{
-									"key": "group",
-									"value": "{{group}}",
+									"key": "activityLevel",
+									"value": "Moderate",
+									"type": "text"
+								},
+								{
+									"key": "groups",
+									"value": "Working Group",
 									"type": "text"
 								}
 							]
@@ -94,7 +114,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"type\" : \"bismuut\",\r\n    \"kelompok\" : \"anjing besar\",\r\n    \"group\" : \"toy\"\r\n}",
+							"raw": "{\r\n    \"type\" : \"bismuut\",\r\n    \"size\" : \"Large\",\r\n    \"activityLevel\" : \"moderate\",\r\n    \"groups\" : \"Toy Group\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -102,15 +122,20 @@
 							}
 						},
 						"url": {
-							"raw": "{{url_local}}/api/admin/type/{{find_id}}",
+							"raw": "{{url_local}}/api/admin/type?id=101",
 							"host": [
 								"{{url_local}}"
 							],
 							"path": [
 								"api",
 								"admin",
-								"type",
-								"{{find_id}}"
+								"type"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "101"
+								}
 							]
 						}
 					},
@@ -128,15 +153,20 @@
 							}
 						],
 						"url": {
-							"raw": "{{url_local}}/api/admin/type/5",
+							"raw": "{{url_local}}/api/admin/type?id=101",
 							"host": [
 								"{{url_local}}"
 							],
 							"path": [
 								"api",
 								"admin",
-								"type",
-								"5"
+								"type"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "101"
+								}
 							]
 						}
 					},
@@ -234,8 +264,8 @@
 							"formdata": [
 								{
 									"key": "picture",
-									"value": "{{picture}}",
-									"type": "text"
+									"type": "file",
+									"src": "/C:/Users/ACER/OneDrive/Gambar/anime/wp3929573-anime-sword-wallpapers.jpg"
 								},
 								{
 									"key": "name",
@@ -306,7 +336,7 @@
 				{
 					"name": "Update Selter Testing",
 					"request": {
-						"method": "PUT",
+						"method": "POST",
 						"header": [
 							{
 								"key": "Authorization",
@@ -315,16 +345,67 @@
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{\r\n   \"nama\" : \"Jaki Selter\",\r\n   \"picture\" : \"Jaki.png\",\r\n   \"address\" : \"Denpasar, Bali\",\r\n   \"description\" : \"Kami adalah pencita hewan, adopsi hewan disini!\",\r\n   \"sosial_media_1\" : \"facebook\",\r\n   \"sosial_media_2\" : \"instagram\",\r\n   \"sosial_media_3\" : \"aipet.id\",\r\n   \"phone\" : \"08129737987\",\r\n   \"city\": \"Denpasar\",\r\n   \"lon\" : -7.12312,\r\n   \"let\" : 123.1231\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Jaki Selter",
+									"type": "text"
+								},
+								{
+									"key": "picture",
+									"type": "file",
+									"src": "/C:/Users/ACER/OneDrive/Gambar/4103ebb384178f3f37c94bb75b64b1a5.jpg"
+								},
+								{
+									"key": "address",
+									"value": "Bali, Ubud",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Kami adalah pencinta hewan, adopsi hewan pilihan ada disini!!",
+									"type": "text"
+								},
+								{
+									"key": "sosial_media_1",
+									"value": "facebook",
+									"type": "text"
+								},
+								{
+									"key": "sosial_media_2",
+									"value": "instagram",
+									"type": "text"
+								},
+								{
+									"key": "sosial_media_3",
+									"value": "aipet.id",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "08329569",
+									"type": "text"
+								},
+								{
+									"key": "city",
+									"value": "Ubud",
+									"type": "text"
+								},
+								{
+									"key": "lon",
+									"value": "-8.4960682",
+									"type": "text"
+								},
+								{
+									"key": "let",
+									"value": "115.2454399",
+									"type": "text"
 								}
-							}
+							]
 						},
 						"url": {
-							"raw": "{{url_local}}/api/selter?id=1",
+							"raw": "{{url_local}}/api/selter?id=4",
 							"host": [
 								"{{url_local}}"
 							],
@@ -335,7 +416,7 @@
 							"query": [
 								{
 									"key": "id",
-									"value": "1"
+									"value": "4"
 								}
 							]
 						}
@@ -354,7 +435,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{url_local}}/api/selter?id=1",
+							"raw": "{{url_local}}/api/selter?id=6",
 							"host": [
 								"{{url_local}}"
 							],
@@ -365,7 +446,7 @@
 							"query": [
 								{
 									"key": "id",
-									"value": "1"
+									"value": "6"
 								}
 							]
 						}
@@ -424,15 +505,20 @@
 							}
 						],
 						"url": {
-							"raw": "{{url_local}}/api/service/detail/1",
+							"raw": "{{url_local}}/api/service/detail?id=4",
 							"host": [
 								"{{url_local}}"
 							],
 							"path": [
 								"api",
 								"service",
-								"detail",
-								"1"
+								"detail"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "4"
+								}
 							]
 						}
 					},
@@ -454,8 +540,8 @@
 							"formdata": [
 								{
 									"key": "picture",
-									"value": "{{picture}}",
-									"type": "text"
+									"type": "file",
+									"src": "/C:/Users/ACER/OneDrive/Gambar/anime/wp6430136-anime-guitar-girl-4k-pc-wallpapers.jpg"
 								},
 								{
 									"key": "name",
@@ -526,11 +612,17 @@
 				{
 					"name": "Update",
 					"request": {
-						"method": "PUT",
+						"method": "POST",
 						"header": [
 							{
 								"key": "Authorization",
 								"value": "{{auth}}",
+								"type": "text"
+							},
+							{
+								"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+								"key": "Content-Type",
+								"value": "multipart/form-data",
 								"type": "text"
 							}
 						],
@@ -539,8 +631,8 @@
 							"formdata": [
 								{
 									"key": "picture",
-									"value": "Sableng_clinic.png",
-									"type": "text"
+									"type": "file",
+									"src": "/C:/Users/ACER/OneDrive/Gambar/anime/uwp1922729.jpeg"
 								},
 								{
 									"key": "name",
@@ -595,14 +687,19 @@
 							]
 						},
 						"url": {
-							"raw": "{{url_local}}/api/service/{{find_id}}",
+							"raw": "{{url_local}}/api/service?id=5",
 							"host": [
 								"{{url_local}}"
 							],
 							"path": [
 								"api",
-								"service",
-								"{{find_id}}"
+								"service"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "5"
+								}
 							]
 						}
 					},
@@ -877,58 +974,68 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Status code is 200\", function(){\r",
-									"    pm.response.to.have.status(200);\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Status time less than 1000ms\", function(){\r",
-									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Response body should js less than 500ms\", function(){\r",
-									"    pm.response.to.have.jsonBody();\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Content Type is present and has value aplication/json\", function(){\r",
-									"    pm.response.to.have.header(\"Content-Type\", \"aplication/json\");\r",
-									"})"
+									""
 								],
 								"type": "text/javascript"
 							}
 						}
 					],
 					"request": {
-						"method": "PATCH",
+						"method": "POST",
 						"header": [
 							{
 								"key": "Authorization",
 								"value": "{{auth}}",
 								"type": "text"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"name\" : \"ruby Joko\",\r\n    \"address\" : \"waru, Sidoarjo\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "sungokong",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "Sunarto",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "kepulauan halmahera",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "sahrimulasako@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "083872578",
+									"type": "text"
+								},
+								{
+									"key": "picture",
+									"contentType": "",
+									"type": "file",
+									"src": "/C:/Users/ACER/OneDrive/Gambar/anime/wp6430136-anime-guitar-girl-4k-pc-wallpapers.jpg",
+									"disabled": true
 								}
-							}
+							]
 						},
 						"url": {
-							"raw": "{{url_local}}/api/users/current",
+							"raw": "{{url_local}}/api/users/current/update",
 							"host": [
 								"{{url_local}}"
 							],
 							"path": [
 								"api",
 								"users",
-								"current"
+								"current",
+								"update"
 							]
 						}
 					},
@@ -966,20 +1073,15 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "dbc5e58f-5b5f-4900-80aa-4727cb9a6040",
+								"value": "{{auth}}",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "http://192.168.100.8:8000/api/users/logout",
-							"protocol": "http",
+							"raw": "{{url_local}}/api/users/logout",
 							"host": [
-								"192",
-								"168",
-								"100",
-								"8"
+								"{{url_local}}"
 							],
-							"port": "8000",
 							"path": [
 								"api",
 								"users",
@@ -1247,7 +1349,7 @@
 						}
 					],
 					"request": {
-						"method": "PUT",
+						"method": "POST",
 						"header": [
 							{
 								"key": "Authorization",
@@ -1257,8 +1359,7 @@
 							{
 								"key": "Content-Type",
 								"value": "application/json",
-								"type": "text",
-								"disabled": true
+								"type": "text"
 							},
 							{
 								"key": "character",
@@ -1268,16 +1369,66 @@
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"name\" : \"Joko\",\r\n    \"age\" : \"1\",\r\n    \"rescue_story\" : \"manusia malang\",\r\n    \"character\" : \"periang, baik\",\r\n    \"picture\" : \"macan.jpg\",\r\n    \"type_id\" : 1,\r\n    \"gender\" : \"Female\",\r\n    \"steril_id\" : 1,\r\n    \"selter_id\" : 1\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Joko",
+									"contentType": "application/json",
+									"type": "text"
+								},
+								{
+									"key": "age",
+									"value": "1",
+									"contentType": "application/json",
+									"type": "text"
+								},
+								{
+									"key": "rescue_story",
+									"value": "manusia malang",
+									"contentType": "application/json",
+									"type": "text"
+								},
+								{
+									"key": "character",
+									"value": "periang baik",
+									"contentType": "application/json",
+									"type": "text"
+								},
+								{
+									"key": "picture",
+									"contentType": "application/json",
+									"type": "file",
+									"src": "/C:/Users/ACER/OneDrive/Gambar/anime/uwp1922729.jpeg"
+								},
+								{
+									"key": "type_id",
+									"value": "1",
+									"contentType": "application/json",
+									"type": "text"
+								},
+								{
+									"key": "gender",
+									"value": "Female",
+									"contentType": "application/json",
+									"type": "text"
+								},
+								{
+									"key": "steril_id",
+									"value": "1",
+									"contentType": "application/json",
+									"type": "text"
+								},
+								{
+									"key": "selter_id",
+									"value": "1",
+									"contentType": "application/json",
+									"type": "text"
 								}
-							}
+							]
 						},
 						"url": {
-							"raw": "{{url_local}}/api/dogs?id=7",
+							"raw": "{{url_local}}/api/dogs?id=1585",
 							"host": [
 								"{{url_local}}"
 							],
@@ -1288,7 +1439,7 @@
 							"query": [
 								{
 									"key": "id",
-									"value": "7"
+									"value": "1585"
 								}
 							]
 						}
@@ -1307,7 +1458,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{url_local}}/api/dogs?id=1",
+							"raw": "{{url_local}}/api/dogs?id=1585",
 							"host": [
 								"{{url_local}}"
 							],
@@ -1318,7 +1469,7 @@
 							"query": [
 								{
 									"key": "id",
-									"value": "1"
+									"value": "1585"
 								}
 							]
 						}
@@ -1337,7 +1488,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{url_local}}/api/dogs/filter?page=1&limit=10&type=Pomeranian",
+							"raw": "{{url_local}}/api/dogs/filter?page=1&limit=10",
 							"host": [
 								"{{url_local}}"
 							],
@@ -1354,10 +1505,6 @@
 								{
 									"key": "limit",
 									"value": "10"
-								},
-								{
-									"key": "type",
-									"value": "Pomeranian"
 								}
 							]
 						}
@@ -1521,7 +1668,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\" : \"Hylos\"\r\n}",
+							"raw": "{\r\n    \"name\" : \"Neutered\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1560,7 +1707,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{url_local}}/api/admin/sterils?id=1",
+							"raw": "{{url_local}}/api/admin/sterils?id=5",
 							"host": [
 								"{{url_local}}"
 							],
@@ -1572,7 +1719,7 @@
 							"query": [
 								{
 									"key": "id",
-									"value": "1"
+									"value": "5"
 								}
 							]
 						}
@@ -1730,6 +1877,218 @@
 								"person",
 								"delete",
 								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Adoption Testing",
+			"item": [
+				{
+					"name": "get Adoption",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{auth}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url_local}}/api/adoption/get?page=1&limit=10&user_id=52",
+							"host": [
+								"{{url_local}}"
+							],
+							"path": [
+								"api",
+								"adoption",
+								"get"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "user_id",
+									"value": "52"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "checkOut",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{auth}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url_local}}/api/adoption/create?dog_id=1",
+							"host": [
+								"{{url_local}}"
+							],
+							"path": [
+								"api",
+								"adoption",
+								"create"
+							],
+							"query": [
+								{
+									"key": "dog_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Onboarding1",
+			"item": [
+				{
+					"name": "Add Onboarding 1",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{auth}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url_local}}/api/onboarding/1/start",
+							"host": [
+								"{{url_local}}"
+							],
+							"path": [
+								"api",
+								"onboarding",
+								"1",
+								"start"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Onboarding 2",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{auth}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "rescueStory1",
+									"value": "hallo",
+									"type": "text"
+								},
+								{
+									"key": "rescueStory2",
+									"value": "manusia",
+									"type": "text"
+								},
+								{
+									"key": "rescueStory3",
+									"value": "kecil",
+									"type": "text"
+								},
+								{
+									"key": "requestStory",
+									"value": "dunia",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://34.124.203.199:8001/api/onboarding/2/start",
+							"protocol": "http",
+							"host": [
+								"34",
+								"124",
+								"203",
+								"199"
+							],
+							"port": "8001",
+							"path": [
+								"api",
+								"onboarding",
+								"2",
+								"start"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getOnboardingFilter",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{auth}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url_local}}/api/onboarding/filter",
+							"host": [
+								"{{url_local}}"
+							],
+							"path": [
+								"api",
+								"onboarding",
+								"filter"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Onboarding Result",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{auth}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url_local}}/api/onboarding/result",
+							"host": [
+								"{{url_local}}"
+							],
+							"path": [
+								"api",
+								"onboarding",
+								"result"
 							]
 						}
 					},

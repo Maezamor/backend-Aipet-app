@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\SaveToken;
+use App\Models\Onboarding;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
@@ -10,6 +12,7 @@ use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\UserLoginRequest;
+use Illuminate\Support\Facades\Session;
 use App\Http\Requests\UserUpdateRequest;
 use App\Http\Requests\UserRegisterRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -17,8 +20,10 @@ use App\Http\Controllers\GoogleCloudStorageController;
 
 class UserController extends Controller
 {
+    
     public function register(UserRegisterRequest $request): JsonResponse
     {
+        
         // geting request from post
         $data = $request->validated();
 
@@ -48,7 +53,7 @@ class UserController extends Controller
         // get data from request
         $data = $request->validated();
         $user = User::where('email', $data['email'])->first();
-
+    
         // get check for databases
         if (!$user || !Hash::check($data['password'], $user->password)) {
             throw new HttpResponseException(response([
@@ -59,15 +64,56 @@ class UserController extends Controller
                 ]
             ], 401));
         }
-
+    
         //Regenerate Access Token
-
         $user->token = Str::uuid()->toString();
         $user->save();
+    
+        //get check about onboarding 
+        $accessOnboarding = Onboarding::where('user_id',$user->id)->exists();
+        if($accessOnboarding){
+            $user->status_onbr =  $accessOnboarding;
+            SaveToken::create([
+                'token' => $user->token,
+                'user_id' => $user->id
+            ]); 
+            return new UserResource($user);
+        }
+    
+        //memasukan data user ke session
+        $user->status_onbr = false;
 
+        // save token in database
+        SaveToken::create([
+            'token' => $user->token,
+            'user_id' => $user->id
+        ]);
         return new UserResource($user);
     }
+    
+    public function getToken(Request $request)
+    {
+        $token = SaveToken::latest()->first();
+        $code_token =  $token->token;
+        $code_user = $token->user_id;
+        $token->delete();
+        if (!$token) {
+            return response()->json([
+                'error' => true,
+                'message' => 'Token tidak ditemukan'
+            ])->setStatusCode(404);
+        }
+    
+        return response()->json([
+            'data' => [
+                'token' => $code_token,
+                'user_id' => $code_user,
+            ]
+        ])->setStatusCode(200);
+    }
+    
 
+    
     public function getCurrent(Request $request): UserResource
     {
         $user = Auth::user();
