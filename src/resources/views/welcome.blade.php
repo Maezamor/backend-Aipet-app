@@ -4,103 +4,142 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Care for Your Dog</title>
+    <title>Bootstrap Landing Page</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+
     <style>
         body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Arial', sans-serif;
-            background-color: #3498db; /* Warna biru laut */
-            color: #2c3e50; /* Warna biru gelap */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #c6f5e5;
+            transition: background-color 0.3s ease-in-out;
         }
 
         header {
-            text-align: center;
-            padding: 80px 0;
-            color: #fff;
+            background: #206d40;
+            color: #ffffff;
+            padding-top: 20px;
+            min-height: 70px;
+            border-bottom: #18441f 4px solid;
+            transition: background-color 0.3s ease-in-out;
         }
 
-        section {
-            padding: 60px 0;
-        }
-
-        h2 {
-            text-align: center;
-            color: #fff;
-        }
-
-        p {
-            text-align: center;
-            max-width: 800px;
-            margin: 20px auto;
-            color: #ecf0f1;
-        }
-
-        .dog-images {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 30px;
-        }
-
-        .dog-images img {
-            width: 300px;
-            height: auto;
-            border-radius: 10px;
-            margin-bottom: 20px;
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 10px 20px;
-            font-size: 18px;
-            font-weight: bold;
-            text-align: center;
+        header a {
+            color: #ffffff;
             text-decoration: none;
-            border-radius: 5px;
-            background-color: #2c3e50; /* Warna biru gelap */
-            color: #fff;
+            text-transform: uppercase;
+            font-size: 16px;
+            transition: color 0.3s ease-in-out;
         }
 
-        .cta-button:hover {
-            background-color: #2980b9; /* Warna biru laut lebih tua */
+        header a:hover {
+            color: #e8491d;
+            transition: color 0.3s ease-in-out;
         }
 
-        footer {
+        .main {
+            padding: 80px 0;
             text-align: center;
-            padding: 20px 0;
-            background-color: #2c3e50; /* Warna biru gelap */
-            color: #fff;
+        }
+
+        .main h1,
+        .main h2 {
+            color: #333333;
+        }
+
+        .main p {
+            font-size: 18px;
+            color: #555555;
+            line-height: 1.6em;
+        }
+
+        .main a.button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #e8491d;
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .main a.button:hover {
+            background-color: #333333;
+            transition: background-color 0.3s ease-in-out;
+        }
+        .jumbotron {
+            margin: 15px 30px 0px 30px;
+            border-radius: 10px;
+            background:
+                linear-gradient(rgba(0, 0, 250, 0.25),
+                    rgba(125, 250, 250, 0.45)),
+                url(https://source.unsplash.com/1600x1050/?dog);
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: white !important;
+            height: auto;
         }
     </style>
 </head>
 
 <body>
 
-    <header>
-        <h1>Care for Your Dog</h1>
-        <p>Providing love and care for your furry friend.</p>
+    <header class="container-fluid">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-dark">
+                <a class="navbar-brand" href="#">
+                    <img class="rounded-circle"
+                        src="https://fbcd.co/images/products/3eac7432730321c3aac109b495f272d6_resize.jpg" alt="Logo"
+                        height="30">
+                </a>
+                <h6>PetaConnect</h6>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><i class="fab fa-facebook"></i> Facebook</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><i class="fab fa-instagram"></i> Instagram</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><i class="fab fa-tiktok"></i> TikTok</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
     </header>
 
-    <section>
-        <h2>Why Choose Us?</h2>
-        <p>We understand the importance of your dog's well-being. Our team of dedicated professionals is committed to providing top-notch care for your beloved pets. Whether it's regular check-ups, grooming, or just a friendly playtime, we've got it all covered!</p>
-        <p>Give your dog the care it deserves. Join us today!</p>
-
-        <div class="dog-images">
-            <img src="https://example.com/dog-image-1.jpg" alt="Dog Image 1">
-            <img src="https://example.com/dog-image-2.jpg" alt="Dog Image 2">
-            <img src="https://example.com/dog-image-3.jpg" alt="Dog Image 3">
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container" style="height: 50vh;">
+            <h1 class="display-4">Peta Connect</h1>
+            <p class="lead">Salam Hangat dari Kami</p>
         </div>
 
-        <div style="text-align: center;">
-            <a href="#" class="cta-button">Join Now</a>
-        </div>
-    </section>
+    </div>
 
-    <footer>
-        <p>&copy; 2023 Care for Your Dog. All rights reserved.</p>
-    </footer>
+    <div class="main container">
+        <h1 class="display-4">Aipet Matchmaking Server</h1>
+        <h2 class="lead">Tentukan Anjing Peliharaanmu</h2>
+        <p class="lead">Buatlah Arti Persahabatan Hidup</p>
+        <a href="#" class="btn btn-primary btn-lg">Learn More</a>
+    </div>
 
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Font Awesome icons -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"></script>
 </body>
-
-</html>
